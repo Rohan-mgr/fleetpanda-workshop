@@ -1,0 +1,383 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* start of navigation styling */
+.navigation {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 3px 0 3px #ccc;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.navigation nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style-type: none;
+}
+.navigation nav ul li > a {
+  text-decoration: none;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+}
+.navigation nav ul li > a:hover {
+  color: #fa6400;
+}
+/* end of navigation styling */
+
+/* start of banner styling */
+#banner {
+  background-image: url("./assets/banner-panda.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+}
+
+#banner::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.hero .hero__image {
+  background: #fff;
+  height: 43vh;
+  width: 40vw;
+  padding: 15px;
+  border-radius: 0.58rem;
+  background-image: url("./assets/fleetpand-home.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: #fff;
+  width: 70%;
+}
+
+.hero__content span {
+  color: #fa6400;
+}
+
+.hero__content h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 60px;
+}
+
+.hero__content p {
+  max-width: 600px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+/* end of banner styling */
+
+/* start of button styling */
+.btn__wrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #fa6400;
+}
+.btn-secondary {
+  background-color: #000;
+  border: 2px solid #fa6400;
+}
+/* end of button styling */
+
+/* start of scroller animation */
+#scroller {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  height: 60px;
+  animation: animateScrollerBtn 2s ease-in-out infinite;
+}
+
+@keyframes animateScrollerBtn {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(5px);
+  }
+
+  60% {
+    transform: translateY(3px);
+  }
+}
+/* end of scroller animation */
+
+/* start of why us section styling */
+#whyus {
+  height: 70vh;
+  display: grid;
+  place-items: center;
+}
+
+#whyus .whyus__content__wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: max-content;
+  padding-top: 1rem;
+}
+
+#whyus .whyus__content__wrapper .whyus__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.whyus__content .whyus__content__left {
+  width: 90%;
+}
+
+.whyus__content p {
+  letter-spacing: 0.5px;
+  font-size: 18px;
+  margin-bottom: 2rem;
+}
+
+#whyus h1 {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+#whyus h1 span {
+  color: #fa6400;
+}
+
+#whyus .whyus__image__wrapper {
+  background-image: url("./assets/about-panda.png");
+  height: 50vh;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* end of why us section */
+
+/* contact us section */
+#contact {
+  padding-top: 1rem;
+  display: grid;
+  place-items: center;
+  height: 70vh;
+}
+#contact h1 {
+  color: #fa6400;
+}
+.contact__form__wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 2rem;
+}
+.contact__form__wrapper .contact__form__content {
+  flex: 1;
+  width: 600px;
+  height: max-content;
+}
+.contact__form__content iframe {
+  width: 100%;
+  height: 500px;
+}
+
+.contact__form__content p {
+  margin: 15px 0;
+}
+
+.contact__form__content__secondary {
+  background-color: #eee;
+  padding: 1rem 2rem;
+}
+#contact label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+#contact input {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+#contact textarea {
+  width: 100%;
+  height: 130px;
+  margin-bottom: 15px;
+}
+/* end of contact us section */
+
+/* newsletter styling */
+#newsletter {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+  background-color: #000;
+  align-items: center;
+}
+.newsletter__left {
+  flex: 1;
+}
+#newsletter .newsletter__left h1 {
+  color: #fff;
+}
+#newsletter .newsletter__left > p:nth-child(2) {
+  color: #ffffffcc;
+  margin: 10px 0;
+}
+#newsletter .newsletter__left > p:nth-child(3) {
+  color: #ffffff99;
+  margin: 10px 0;
+}
+#newsletter .newsletter__left > p:nth-child(3) a {
+  text-decoration: none;
+  color: #fa6400;
+}
+.newsletter__right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  flex: 1;
+}
+.newsletter__right input {
+  display: inline-block;
+  padding: 15px;
+  outline: none;
+  border: none;
+  border-radius: 7px;
+  width: 60%;
+}
+/* end of newletter section styling */
+
+/* footer */
+#footer {
+  padding-top: 3rem;
+  display: flex;
+}
+.footer__left {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  padding-left: 2rem;
+}
+.footer__left__top {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+.footer__left__content {
+  display: flex;
+  flex-direction: column;
+}
+.footer__left__content p {
+  color: #fa6400;
+}
+.footer__left__content ul {
+  list-style-type: none;
+}
+.footer__left__content ul li {
+  margin: 15px 0;
+}
+.footer__left__content ul li a {
+  text-decoration: none;
+  color: #000;
+}
+.footer__left__content ul li a:hover {
+  color: #fa6400;
+}
+.footer__right {
+  flex: 3;
+}
+.footer__right .footer__right__image__wrapper {
+  width: 100%;
+  height: 445px;
+  overflow: hidden;
+  position: relative;
+}
+.footer__right .footer__right__image__wrapper img {
+  position: absolute;
+  right: -2.8rem;
+  bottom: -1rem;
+  height: 400px;
+  object-fit: contain;
+  object-position: center center;
+}
+.footer__left__bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.footer__left__bottom__left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer__left__bottom__left p:nth-child(1) {
+  color: #fa6400;
+}
+.footer__left__bottom .terms__condition {
+  align-items: flex-end;
+  display: flex;
+  gap: 2rem;
+}
+.footer__contact i {
+  margin: 0 5px;
+}
