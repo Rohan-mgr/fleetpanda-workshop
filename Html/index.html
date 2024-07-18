@@ -42,6 +42,9 @@
             <a href="#newsletter">NewsLetter</a>
           </li>
           <li>
+            <a href="#clients">Clients</a>
+          </li>
+          <li>
             <a href="#">Resources</a>
           </li>
           <li>
@@ -185,6 +188,10 @@
     <!-- contact us -->
     <div id="contact">
       <h1>Contact Us</h1>
+      <p>
+        Have question or feedback? We'r here to help send us a message, and we
+        will respond within 24 hours.
+      </p>
       <div class="contact__form__wrapper">
         <div class="contact__form__content">
           <iframe
@@ -196,14 +203,16 @@
           ></iframe>
         </div>
         <div class="contact__form__content contact__form__content__secondary">
-          <form>
+          <form onsubmit="return handleFormSubmission(event)">
             <label for="name">Full Name</label>
             <input
               type="text"
               id="name"
               name="name"
               placeholder="Enter your name"
+              required
             />
+            <p class="error-msg" id="name-error-msg"></p>
 
             <label for="phone">Contact</label>
             <input
@@ -211,7 +220,10 @@
               id="phone"
               name="phone"
               placeholder="Enter your contact"
+              required
+              autocomplete="off"
             />
+            <p class="error-msg" id="contact-error-msg"></p>
 
             <label for="email">Email</label>
             <input
@@ -219,12 +231,22 @@
               placeholder="Enter your email"
               name="email"
               id="email"
+              required
+              autocomplete="off"
             />
+            <p class="error-msg" id="email-error-msg"></p>
 
             <label for="message">Message</label>
-            <textarea id="message" name="message" id="message"></textarea>
+            <textarea
+              id="message"
+              name="message"
+              id="message"
+              autocomplete="off"
+              required
+            ></textarea>
+            <p class="error-msg" id="message-error-msg"></p>
 
-            <button class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
       </div>
@@ -367,5 +389,7 @@
       </div>
     </div>
     <!-- end of footer -->
+
+    <script src="./script.js"></script>
   </body>
 </html>
