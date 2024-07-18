@@ -215,6 +215,50 @@ html {
 }
 /* end of why us section */
 
+/* clients  */
+#clients {
+  text-align: center;
+  padding: 3rem 5rem;
+}
+#clients h1 {
+  color: #fa6400;
+  text-align: center;
+}
+#clients .clients__image__wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 2rem 0;
+}
+#clients .clients__image__wrapper .slider {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  width: calc(150px * 8);
+  animation: animateSlider 20s linear infinite forwards;
+  animation-delay: 0ms;
+}
+#clients .clients__image__wrapper .slider-reverse {
+  margin-top: 2rem;
+  animation: animateSlider 10s linear infinite reverse;
+  animation-delay: 0ms;
+}
+
+#clients .clients__image__wrapper img {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+}
+@keyframes animateSlider {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-150px * 4));
+  }
+}
+/* end of clients */
+
 /* contact us section */
 #contact {
   padding-top: 1rem;
