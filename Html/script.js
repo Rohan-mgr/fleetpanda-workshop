@@ -14,7 +14,7 @@ const emailErrorTag = document.querySelector("#email-error-msg");
 const messageErrorTag = document.querySelector("#message-error-msg");
 
 function validateFullName(event) {
-  let inputFullName = event.target.value;
+  let inputFullName = fullName.value;
   if (inputFullName.trim() === "") {
     nameErrorMsg = "Please enter your full name";
     nameErrorTag.innerHTML = nameErrorMsg;
@@ -31,7 +31,7 @@ function validateFullName(event) {
 }
 
 function validateContact(event) {
-  let inputContact = event.target.value;
+  let inputContact = contactNumber.value;
   if (inputContact.length < 1 || inputContact.trim() === "") {
     contactErrorMsg = "Please enter your contact number";
     contactErrorTag.innerHTML = contactErrorMsg;
@@ -48,7 +48,7 @@ function validateContact(event) {
 }
 
 function validateEmail(event) {
-  let inputEmail = event.target.value;
+  let inputEmail = email.value;
   let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   if (inputEmail.trim() === "") {
     emailErrorMsg = "Please enter your email";
@@ -66,7 +66,7 @@ function validateEmail(event) {
 }
 
 function validateMessage(event) {
-  let inputMsg = event.target.value;
+  let inputMsg = message.value;
   if (inputMsg.trim() === "") {
     messageErrorMsg = "Please enter your message";
     messageErrorTag.innerHTML = messageErrorMsg;
@@ -89,11 +89,19 @@ message.addEventListener("keyup", validateMessage);
 
 function handleFormSubmission(e) {
   e.preventDefault();
-  if (validateFullName && validateContact && validateEmail && validateMessage) {
-    alert(
-      "Your Details: " +
-        `\n ${fullName.value} \n ${contactNumber.value} \n ${email.value} \n ${message.value}`
-    );
+  if (
+    validateFullName() &&
+    validateContact() &&
+    validateEmail() &&
+    validateMessage()
+  ) {
+    let data = {
+      name: fullName.value,
+      phone: contactNumber.value,
+      email: email.value,
+      message: message.value,
+    };
+    alert("Your Details: " + `\n ${JSON.stringify(data)}`);
     location.reload();
   }
 }

@@ -265,6 +265,7 @@ html {
   padding-top: 1rem;
   display: grid;
   place-items: center;
+  height: max-content;
 }
 #contact h1 {
   color: #fa6400;
