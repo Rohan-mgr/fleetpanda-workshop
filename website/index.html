@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./assets/css/index.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,20 +17,20 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Html form</title>
+    <title>Petroleum Website</title>
   </head>
   <body>
     <!-- navigation -->
     <div class="navigation">
       <div class="logo__wrapper">
-        <a href="/">
+        <a href="/website/index.html">
           <img src="./assets/fleedpanda-logo.png" alt="fleetpanda-logo" />
         </a>
       </div>
       <nav>
         <ul>
           <li>
-            <a href="#banner">Home</a>
+            <a href="/website/index.html">Home</a>
           </li>
           <li>
             <a href="#whyus">Why Us</a>
@@ -44,12 +44,22 @@
           <li>
             <a href="#clients">Clients</a>
           </li>
-          <li>
-            <a href="#">Resources</a>
-          </li>
-          <li>
-            <a href="#">Planning</a>
-          </li>
+          <div class="blogs">
+            <li>
+              <a href="./app/blogs.html">Blogs</a>
+            </li>
+          </div>
+          <div class="loginSignUpWrapper">
+            <li>
+              <a href="./app/login.html">Login</a>
+            </li>
+            <li>
+              <a href="./app/signup.html">Sign Up</a>
+            </li>
+          </div>
+          <div class="logoutWrapper">
+            <li>Logout</li>
+          </div>
         </ul>
       </nav>
     </div>
@@ -203,7 +213,7 @@
           ></iframe>
         </div>
         <div class="contact__form__content contact__form__content__secondary">
-          <form onsubmit="return handleFormSubmission(event)">
+          <form id="contactForm">
             <label for="name">Full Name</label>
             <input
               type="text"
@@ -385,12 +395,12 @@
       </div>
       <div class="footer__right">
         <div class="footer__right__image__wrapper">
-          <img src="./assets//footer-panda.webp" alt="footer-panda" />
+          <img src="./assets/footer-panda.webp" alt="footer-panda" />
         </div>
       </div>
     </div>
     <!-- end of footer -->
 
-    <script src="./script.js"></script>
+    <script type="module" src="./assets/js/script.js"></script>
   </body>
 </html>

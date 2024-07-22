@@ -38,11 +38,20 @@ html {
 .navigation nav ul li > a:hover {
   color: #fa6400;
 }
+.loginSignUpWrapper {
+  display: flex;
+  gap: 2rem;
+}
+.logoutWrapper,
+.blogs {
+  font-weight: 500;
+  cursor: pointer;
+}
 /* end of navigation styling */
 
 /* start of banner styling */
 #banner {
-  background-image: url("./assets/banner-panda.jpg");
+  background-image: url("../banner-panda.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -77,7 +86,7 @@ html {
   width: 40vw;
   padding: 15px;
   border-radius: 0.58rem;
-  background-image: url("./assets/fleetpand-home.png");
+  background-image: url("../fleetpand-home.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -207,7 +216,7 @@ html {
 }
 
 #whyus .whyus__image__wrapper {
-  background-image: url("./assets/about-panda.png");
+  background-image: url("../about-panda.png");
   height: 50vh;
   width: 100%;
   background-size: contain;

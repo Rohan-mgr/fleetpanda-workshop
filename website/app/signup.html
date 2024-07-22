@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/login.css" />
+    <title>Petroleum | Login</title>
+  </head>
+  <body>
+    <!-- navigation -->
+    <div class="navigation">
+      <div class="logo__wrapper">
+        <a href="/website/index.html">
+          <img src="../assets/fleedpanda-logo.png" alt="fleetpanda-logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="/website/index.html">Home</a>
+          </li>
+          <li>
+            <a href="#whyus">Why Us</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+          <li>
+            <a href="#newsletter">NewsLetter</a>
+          </li>
+          <li>
+            <a href="#clients">Clients</a>
+          </li>
+          <div class="blogs">
+            <li>
+              <a href="blogs.html">Blogs</a>
+            </li>
+          </div>
+          <div class="loginSignUpWrapper">
+            <li>
+              <a href="login.html">Login</a>
+            </li>
+            <li>
+              <a href="signup.html">Sign Up</a>
+            </li>
+          </div>
+        </ul>
+      </nav>
+    </div>
+    <!-- end of navigation? -->
+
+    <div class="login">
+      <form>
+        <div class="form__header">
+          <h1>Sign Up</h1>
+        </div>
+        <div>
+          <label for="fullName">FullName</label>
+          <input
+            type="test"
+            id="fullName"
+            name="fullName"
+            autocomplete="off"
+            placeholder="Full Name"
+          />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="off"
+            placeholder="Email Address"
+          />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="off"
+          />
+        </div>
+        <div>
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            autocomplete="off"
+          />
+        </div>
+        <button type="submit" class="btn btn-secondary">Sign Up</button>
+      </form>
+    </div>
+    <script type="module" src="../assets/js/signupScript.js"></script>
+  </body>
+</html>
