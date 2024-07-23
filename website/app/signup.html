@@ -9,6 +9,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/css/login.css" />
+    <!-- axios cdnjs -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Petroleum | Login</title>
   </head>
   <body>
@@ -49,13 +51,16 @@
               <a href="signup.html">Sign Up</a>
             </li>
           </div>
+          <div class="logoutWrapper">
+            <li>Logout</li>
+          </div>
         </ul>
       </nav>
     </div>
     <!-- end of navigation? -->
 
     <div class="login">
-      <form>
+      <form id="signup__form">
         <div class="form__header">
           <h1>Sign Up</h1>
         </div>
@@ -68,6 +73,7 @@
             autocomplete="off"
             placeholder="Full Name"
           />
+          <p class="error-msg" id="name-error-msg"></p>
         </div>
         <div>
           <label for="email">Email</label>
@@ -78,6 +84,7 @@
             autocomplete="off"
             placeholder="Email Address"
           />
+          <p class="error-msg" id="email-error-msg"></p>
         </div>
         <div>
           <label for="password">Password</label>
@@ -88,16 +95,7 @@
             placeholder="Password"
             autocomplete="off"
           />
-        </div>
-        <div>
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            autocomplete="off"
-          />
+          <p class="error-msg" id="password-error-msg"></p>
         </div>
         <button type="submit" class="btn btn-secondary">Sign Up</button>
       </form>
