@@ -38,11 +38,11 @@ html {
 .navigation nav ul li > a:hover {
   color: #fa6400;
 }
-.loginSignUpWrapper {
+.auth__btns__wrapper {
   display: flex;
   gap: 2rem;
 }
-.logoutWrapper,
+.logout__btn__wrapper,
 .blogs {
   font-weight: 500;
   cursor: pointer;
@@ -51,7 +51,7 @@ html {
 
 /* start of banner styling */
 #banner {
-  background-image: url("../banner-panda.jpg");
+  background-image: url("../images/banner-panda.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -86,7 +86,7 @@ html {
   width: 40vw;
   padding: 15px;
   border-radius: 0.58rem;
-  background-image: url("../fleetpand-home.png");
+  background-image: url("../images/fleetpand-home.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -122,12 +122,14 @@ html {
 .btn__wrapper {
   display: flex;
   gap: 30px;
+  padding: 10px;
+  white-space: nowrap;
 }
 
 .btn {
   outline: none;
   border: none;
-  padding: 15px 20px;
+  padding: 10px;
   border-radius: 4px;
   font-size: 18px;
   font-weight: 500;
@@ -138,18 +140,21 @@ html {
 
 .btn-primary {
   background-color: #fa6400;
+  padding: 10px;
 }
 .btn-secondary {
   background-color: #000;
   border: 2px solid #fa6400;
+  padding: 10px;
 }
 /* end of button styling */
 
 /* start of scroller animation */
 #scroller {
-  position: absolute;
   z-index: 1;
+  position: absolute;
   left: 50%;
+  transform: translateX(-50%);
   bottom: 20px;
   height: 60px;
   animation: animateScrollerBtn 2s ease-in-out infinite;
@@ -176,7 +181,7 @@ html {
 
 /* start of why us section styling */
 #whyus {
-  height: 70vh;
+  /* height: 70vh; */
   display: grid;
   place-items: center;
 }
@@ -203,6 +208,8 @@ html {
 .whyus__content p {
   letter-spacing: 0.5px;
   font-size: 18px;
+  padding: 10px;
+  text-align: center;
   margin-bottom: 2rem;
 }
 
@@ -216,7 +223,7 @@ html {
 }
 
 #whyus .whyus__image__wrapper {
-  background-image: url("../about-panda.png");
+  background-image: url("../images/about-panda.png");
   height: 50vh;
   width: 100%;
   background-size: contain;
@@ -292,13 +299,15 @@ html {
 }
 .contact__form__wrapper {
   display: flex;
+  gap: 10px;
   justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
+  height: max-content;
   padding: 0 2rem;
 }
 .contact__form__wrapper .contact__form__content {
   flex: 1;
-  width: 700px;
   height: max-content;
 }
 .contact__form__content iframe {
@@ -450,3 +459,78 @@ html {
 .footer__contact i {
   margin: 0 5px;
 }
+
+@media screen and (max-width: 1270px) {
+  .navigation {
+    display: none;
+  }
+  #newsletter {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .contact__form__wrapper {
+    flex-direction: column;
+  }
+  #banner {
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    border: 2px solid yellow;
+  }
+  .hero__content {
+    justify-content: center;
+    align-items: center;
+    /* padding: 15px; */
+    width: 100%;
+  }
+  .hero:nth-child(1) {
+    display: none;
+  }
+  .hero__content h1 {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 30px;
+  }
+  #whyus .whyus__content__wrapper .whyus__content {
+    padding-left: 0px;
+    text-align: center;
+  }
+  #whyus .whyus__content__wrapper {
+    flex-direction: column;
+  }
+  .whyus__content .whyus__content__left {
+    width: 100%;
+  }
+  .btn__wrapper {
+    justify-content: center;
+  }
+  #footer {
+    display: none;
+  }
+  #clients {
+    padding: 3rem 1rem;
+  }
+  #clients .clients__image__wrapper .slider {
+    gap: 1rem;
+  }
+  #clients .clients__image__wrapper img {
+    width: 50px;
+    height: 50px;
+  }
+}
+/* @media screen and (min-width: 992px) {
+  .contact__form__wrapper {
+    flex-direction: row;
+  }
+  #banner {
+    flex-direction: row;
+  }
+  .hero__content {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .hero:nth-child(1) {
+    display: flex;
+  }
+} */

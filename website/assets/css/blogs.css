@@ -34,11 +34,11 @@
 .navigation nav ul li > a:hover {
   color: #fa6400;
 }
-.loginSignUpWrapper {
+.auth__btns__wrapper {
   display: flex;
   gap: 2rem;
 }
-.logoutWrapper,
+.logout__btn__wrapper,
 .blogs {
   font-weight: 500;
   cursor: pointer;

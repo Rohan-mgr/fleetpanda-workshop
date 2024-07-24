@@ -4,16 +4,12 @@ import {
   validateContact,
   validateMessage,
 } from "./validation.js";
+import { toggleNavLinks, logOut } from "./helper.js";
 
-if (localStorage.getItem("loginToken")) {
-  document.querySelector(".loginSignUpWrapper").style.display = "none";
-  document.querySelector(".blogs").style.display = "flex";
-  document.querySelector(".logoutWrapper").style.display = "block";
-} else {
-  document.querySelector(".loginSignUpWrapper").style.display = "flex";
-  document.querySelector(".logoutWrapper").style.display = "none";
-  document.querySelector(".blogs").style.display = "none";
-}
+toggleNavLinks();
+
+const logoutBtn = document.querySelector(".logout__btn__wrapper");
+logoutBtn.addEventListener("click", logOut);
 
 const fullName = document.querySelector("#name");
 const contactNumber = document.querySelector("#phone");
@@ -38,7 +34,7 @@ message.addEventListener("keyup", (e) =>
   validateMessage(e.target.value, messageErrorTag)
 );
 
-let contactForm = document.querySelector("#contactForm");
+const contactForm = document.querySelector("#contactForm");
 contactForm.addEventListener("submit", handleFormSubmission);
 
 function handleFormSubmission(e) {
@@ -58,11 +54,4 @@ function handleFormSubmission(e) {
     alert("Your Details: " + `\n ${JSON.stringify(data)}`);
     location.reload();
   }
-}
-
-let logoutBtn = document.querySelector(".logoutWrapper");
-logoutBtn.addEventListener("click", logOut);
-function logOut() {
-  localStorage.clear();
-  location.href = "/website/index.html";
 }
