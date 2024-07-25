@@ -13,6 +13,19 @@ export function toggleNavLinks() {
   }
 }
 
+export function toggleHamburgerMenu() {
+  let hamburgerMenu = document.querySelector(".hamburger__menu");
+  let navLinkWrapper = document.querySelector(".nav__link__wrapper");
+
+  hamburgerMenu.addEventListener("click", () => {
+    if (navLinkWrapper.classList.contains("responsive__nav")) {
+      navLinkWrapper.classList.remove("responsive__nav");
+    } else {
+      navLinkWrapper.classList.add("responsive__nav");
+    }
+  });
+}
+
 export function logOut() {
   localStorage.clear();
   location.href = "/website/index.html";

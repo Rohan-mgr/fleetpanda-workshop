@@ -1,6 +1,12 @@
-import { toggleNavLinks, logOut, renderBlogsCard } from "./helper.js";
+import {
+  toggleNavLinks,
+  logOut,
+  renderBlogsCard,
+  toggleHamburgerMenu,
+} from "./helper.js";
 
 toggleNavLinks();
+toggleHamburgerMenu();
 
 const logoutBtn = document.querySelector(".logout__btn__wrapper");
 logoutBtn.addEventListener("click", logOut);

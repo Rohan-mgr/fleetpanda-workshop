@@ -3,11 +3,13 @@ import {
   logOut,
   renderBlogDetails,
   renderBlogComments,
+  toggleHamburgerMenu,
 } from "./helper.js";
 
 axios.defaults.baseURL = "https://jsonplaceholder.org";
 
 toggleNavLinks();
+toggleHamburgerMenu();
 
 const logoutBtn = document.querySelector(".logout__btn__wrapper");
 logoutBtn.addEventListener("click", logOut);

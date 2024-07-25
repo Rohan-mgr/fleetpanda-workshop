@@ -24,18 +24,18 @@ html {
   z-index: 10;
 }
 
-.navigation nav ul {
+.nav__link__wrapper {
   display: flex;
   gap: 2rem;
   list-style-type: none;
 }
-.navigation nav ul li > a {
+.nav__link__wrapper li > a {
   text-decoration: none;
   color: #000;
   font-weight: 500;
   transition: all 0.3s ease-in-out;
 }
-.navigation nav ul li > a:hover {
+.nav__link__wrapper li > a:hover {
   color: #fa6400;
 }
 .auth__btns__wrapper {
@@ -45,6 +45,11 @@ html {
 .logout__btn__wrapper,
 .blogs {
   font-weight: 500;
+  cursor: pointer;
+}
+.hamburger__menu {
+  display: none;
+  font-size: 25px;
   cursor: pointer;
 }
 /* end of navigation styling */
@@ -461,8 +466,21 @@ html {
 }
 
 @media screen and (max-width: 1270px) {
-  .navigation {
+  .nav__link__wrapper {
     display: none;
+  }
+  .responsive__nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 1rem;
+  }
+  .hamburger__menu {
+    display: block;
   }
   #newsletter {
     flex-direction: column;
@@ -506,7 +524,15 @@ html {
     justify-content: center;
   }
   #footer {
-    display: none;
+    flex-direction: column;
+  }
+  .footer__left__bottom {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .footer__left__top {
+    flex-direction: column;
+    flex-wrap: wrap;
   }
   #clients {
     padding: 3rem 1rem;

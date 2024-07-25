@@ -3,11 +3,12 @@ import {
   validateFullName,
   validatePassword,
 } from "./validation.js";
-import { toggleNavLinks, logOut } from "./helper.js";
+import { toggleNavLinks, logOut, toggleHamburgerMenu } from "./helper.js";
 
 axios.defaults.baseURL = "https://reqres.in";
 
 toggleNavLinks();
+toggleHamburgerMenu();
 
 const logoutBtn = document.querySelector(".logout__btn__wrapper");
 logoutBtn.addEventListener("click", logOut);

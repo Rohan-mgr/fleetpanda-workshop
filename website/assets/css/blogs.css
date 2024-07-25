@@ -20,19 +20,24 @@
   z-index: 10;
 }
 
-.navigation nav ul {
+.nav__link__wrapper {
   display: flex;
   gap: 2rem;
   list-style-type: none;
 }
-.navigation nav ul li > a {
+.nav__link__wrapper li > a {
   text-decoration: none;
   color: #000;
   font-weight: 500;
   transition: all 0.3s ease-in-out;
 }
-.navigation nav ul li > a:hover {
+.nav__link__wrapper li > a:hover {
   color: #fa6400;
+}
+.hamburger__menu {
+  display: none;
+  font-size: 25px;
+  cursor: pointer;
 }
 .auth__btns__wrapper {
   display: flex;
@@ -98,4 +103,22 @@
 #read__more {
   color: blue;
   cursor: pointer;
+}
+@media screen and (max-width: 1270px) {
+  .nav__link__wrapper {
+    display: none;
+  }
+  .responsive__nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 1rem;
+  }
+  .hamburger__menu {
+    display: block;
+  }
 }

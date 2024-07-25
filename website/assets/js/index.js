@@ -4,9 +4,10 @@ import {
   validateContact,
   validateMessage,
 } from "./validation.js";
-import { toggleNavLinks, logOut } from "./helper.js";
+import { toggleNavLinks, logOut, toggleHamburgerMenu } from "./helper.js";
 
 toggleNavLinks();
+toggleHamburgerMenu();
 
 const logoutBtn = document.querySelector(".logout__btn__wrapper");
 logoutBtn.addEventListener("click", logOut);

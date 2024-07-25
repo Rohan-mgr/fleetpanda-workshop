@@ -8,6 +8,13 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="../assets/css/blogsDetail.css" />
     <!-- axios cdnjs -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -23,41 +30,43 @@
           />
         </a>
       </div>
-      <nav>
-        <ul>
+      <div class="hamburger__menu">
+        <i class="fa-solid fa-bars" style="color: #000000"></i>
+      </div>
+      <!-- <nav class="nav__wrapper"> -->
+      <ul class="nav__link__wrapper">
+        <li>
+          <a href="/website/index.html">Home</a>
+        </li>
+        <li>
+          <a href="#whyus">Why Us</a>
+        </li>
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+        <li>
+          <a href="#newsletter">NewsLetter</a>
+        </li>
+        <li>
+          <a href="#clients">Clients</a>
+        </li>
+        <div class="blogs">
           <li>
-            <a href="/website/index.html">Home</a>
+            <a href="./app/blogs.html">Blogs</a>
+          </li>
+        </div>
+        <div class="auth__btns__wrapper">
+          <li>
+            <a href="login.html">Login</a>
           </li>
           <li>
-            <a href="#whyus">Why Us</a>
+            <a href="./signup.html">Sign Up</a>
           </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
-          <li>
-            <a href="#newsletter">NewsLetter</a>
-          </li>
-          <li>
-            <a href="#clients">Clients</a>
-          </li>
-          <div class="auth__btns__wrapper">
-            <li>
-              <a href="login.html">Login</a>
-            </li>
-            <li>
-              <a href="signup.html">Sign Up</a>
-            </li>
-          </div>
-          <div class="blogs">
-            <li>
-              <a href="blogs.html">Blogs</a>
-            </li>
-          </div>
-          <div class="logout__btn__wrapper">
-            <li>Logout</li>
-          </div>
-        </ul>
-      </nav>
+        </div>
+        <div class="logout__btn__wrapper">
+          <li>Logout</li>
+        </div>
+      </ul>
     </div>
     <!-- end of navigation? -->
 
