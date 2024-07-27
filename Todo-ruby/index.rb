@@ -36,7 +36,7 @@ loop do
     puts "Todo added successfully"
   when 2
     fileObj = File.open("todos.txt")
-    todos = fileObj.readlines.map(&:chomp)
+    todos = fileObj.readlines
     if todos.length > 0 
       puts "Enter todo id to delete: "
       todo_id_delete = gets.chomp.to_i
@@ -57,12 +57,11 @@ loop do
       puts "Todo Id          Todo Title"
       todos.each_with_index do |title, index|
         puts "  #{index+=1}          #{title}"
-        puts
       end
     else
       puts "Todos list is empty"
     end
-
+    fileObj.close
   when 4
     fileObj = File.open("todos.txt")
     todos = fileObj.readlines.map(&:chomp)
