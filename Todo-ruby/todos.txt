@@ -1,1 +1,3 @@
-buy t-shirt
+buy t-shirts
+go to shopping
+buy a pair of shoes
