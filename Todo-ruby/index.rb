@@ -35,50 +35,62 @@ loop do
     file.close
     puts "Todo added successfully"
   when 2
-    fileObj = File.open("todos.txt")
-    todos = fileObj.readlines
-    if todos.length > 0 
-      puts "Enter todo id to delete: "
-      todo_id_delete = gets.chomp.to_i
-      updated_todos = delete_todo(todos, todo_id_delete)
-      File.open("todos.txt", "w") do |file|
-        updated_todos.each {|todo| file.puts(todo)}
+    if(File.exist?("todos.txt"))
+      fileObj = File.open("todos.txt")
+      todos = fileObj.readlines
+      if todos.length > 0 
+        puts "Enter todo id to delete: "
+        todo_id_delete = gets.chomp.to_i
+        updated_todos = delete_todo(todos, todo_id_delete)
+        File.open("todos.txt", "w") do |file|
+          updated_todos.each {|todo| file.puts(todo)}
+        end
+        puts "Todo deleted successfully"
+        fileObj.close
+      else
+        puts "Todos list is empty"
       end
-      puts "Todo deleted successfully"
     else
       puts "Todos list is empty"
     end
-    fileObj.close
   when 3
-    puts "================= Your Todos ======================="
-    fileObj = File.open("todos.txt")
-    todos = fileObj.readlines
-    if todos.length > 0 
-      puts "Todo Id          Todo Title"
-      todos.each_with_index do |title, index|
-        puts "  #{index+=1}          #{title}"
+    if(File.exist?("todos.txt"))
+      puts "================= Your Todos ======================="
+      fileObj = File.open("todos.txt")
+      todos = fileObj.readlines
+      if todos.length > 0 
+        puts "Todo Id          Todo Title"
+        todos.each_with_index do |title, index|
+          puts "  #{index+=1}          #{title}"
+        end
+        fileObj.close
+      else
+        puts "Todos list is empty"
       end
     else
-      puts "Todos list is empty"
+      puts "Todo list is empty"
     end
-    fileObj.close
   when 4
-    fileObj = File.open("todos.txt")
-    todos = fileObj.readlines.map(&:chomp)
-    if todos.length > 0 
-      puts "Enter todo id to update: "
-      todo_id_update = gets.chomp.to_i
-      puts "Enter todo new title: "
-      new_title = gets.chomp
-      updated_todos = update_todo(todos, todo_id_update, new_title)
-      File.open("todos.txt", "w") do |file|
-        updated_todos.each {|todo| file.puts(todo)}
+   if(File.exist?("todos.txt")) 
+      fileObj = File.open("todos.txt")
+      todos = fileObj.readlines.map(&:chomp)
+      if todos.length > 0 
+        puts "Enter todo id to update: "
+        todo_id_update = gets.chomp.to_i
+        puts "Enter todo new title: "
+        new_title = gets.chomp
+        updated_todos = update_todo(todos, todo_id_update, new_title)
+        File.open("todos.txt", "w") do |file|
+          updated_todos.each {|todo| file.puts(todo)}
+        end
+        puts "Todo updated successfully"
+        fileObj.close
+      else
+        puts "Todos list is empty"
       end
-      puts "Todo updated successfully"
     else
       puts "Todos list is empty"
     end
-    fileObj.close
   when 5
     break;
   else 
