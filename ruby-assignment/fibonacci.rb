@@ -10,8 +10,9 @@ def fibs(n)
 end
 fibs(8)
 
-N = 8
 
+
+N = 8
 def fibs_rec(n)
   if n == 0
     return 0

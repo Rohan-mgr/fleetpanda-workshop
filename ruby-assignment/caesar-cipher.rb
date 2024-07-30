@@ -12,4 +12,4 @@ def caesar_cipher word, salt
   end
   puts convertedStr
 end
-caesar_cipher("What a name sir G:)", 5)
+caesar_cipher("Z", 5)
