@@ -1,20 +1,5 @@
-def delete_todo(todos, index) 
-  if(index >= 1 && index <= todos.length)
-    todos.delete_at(index-1)
-  else 
-    puts "Invalid Id"
-  end
-  todos
-end
 
-def update_todo(todos, index, new_todo_title)
-  if(index >= 1 && index <= todos.length) 
-    todos[index-1] = new_todo_title
-  else
-    puts "Invalid Id"
-  end
-  todos
-end
+require "./todo_module.rb"
 
 loop do 
   puts "1. Add todo to the list"
@@ -41,7 +26,16 @@ loop do
       if todos.length > 0 
         puts "Enter todo id to delete: "
         todo_id_delete = gets.chomp.to_i
-        updated_todos = delete_todo(todos, todo_id_delete)
+
+        if todo_id_delete > todos.length || todo_id_delete <= 0
+          puts "Invalid todo Id"
+          puts "\n*** Press Enter key to continue ***"
+          gets.chomp
+          system "clear"
+          next
+        end
+
+        updated_todos = TodoHelper.delete_todo(todos, todo_id_delete)
         File.open("todos.txt", "w") do |file|
           updated_todos.each {|todo| file.puts(todo)}
         end
@@ -77,9 +71,18 @@ loop do
       if todos.length > 0 
         puts "Enter todo id to update: "
         todo_id_update = gets.chomp.to_i
+        
+        if todo_id_update > todos.length || todo_id_update <= 0
+          puts "Invalid todo Id"
+          puts "\n*** Press Enter key to continue ***"
+          gets.chomp
+          system "clear"
+          next
+        end
+
         puts "Enter todo new title: "
         new_title = gets.chomp
-        updated_todos = update_todo(todos, todo_id_update, new_title)
+        updated_todos = TodoHelper.update_todo(todos, todo_id_update, new_title)
         File.open("todos.txt", "w") do |file|
           updated_todos.each {|todo| file.puts(todo)}
         end
