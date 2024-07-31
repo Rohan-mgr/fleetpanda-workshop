@@ -1,0 +1,16 @@
+{
+  "records": [
+    {
+      "id": "019107ec-ab5f-7296-a499-bc379033178b",
+      "name": "Rohan Magar",
+      "contact": 9864214929,
+      "address": "Boudha"
+    },
+    {
+      "id": "01910878-32d8-7131-bcfa-c10e84e02717",
+      "name": "Bipin Thapa",
+      "contact": "1234567890",
+      "address": "Ratnapark"
+    }
+  ]
+}
