@@ -42,7 +42,8 @@ class Address < AddressManager
       puts "1. Update Name"
       puts "2. Update Contact"
       puts "3. Update Address"
-      puts "4. Exit Editing"
+      puts "4. Edit all"
+      puts "5. Exit Editing"
 
       puts "Please choose editing action: "
       choice = gets.chomp.to_i
@@ -64,12 +65,23 @@ class Address < AddressManager
         update_address(id, new_address)
         break
       when 4
+        puts "Enter new Name: "
+        new_name = gets.chomp 
+        puts "Enter new Contact: "
+        new_contact = gets.chomp 
+        puts "Enter new Address: "
+        new_address = gets.chomp
+        update_name(id, new_name)
+        update_contact(id, new_contact)
+        update_address(id, new_address)
+        break
+      when 5
         break
       else
         puts "Invalid Editing Choice"
       end
 
-      break if choice == 4
+      break if choice == 5
     end
   end
 end
