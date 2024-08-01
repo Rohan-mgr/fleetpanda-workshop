@@ -1,5 +1,7 @@
 require 'uuid7'
 require './address_manager.rb'
+require './helper.rb'
+include Helper
 
 class Address < AddressManager
   def self.initialize_add_address
@@ -46,7 +48,7 @@ class Address < AddressManager
       choice = gets.chomp.to_i
 
       case choice
-      when 1
+      when map_search_menu_choice("search_by_name")
         puts "Enter name to search: "
         name_search = gets.chomp
         search_result = search_by_name(name_search)
@@ -56,7 +58,7 @@ class Address < AddressManager
           puts "#{info['id']}           #{info['name']}             #{info['contact']}               #{info['address']}"
         end
         break
-      when 2
+      when map_search_menu_choice("search_by_contact")
         puts "Enter contact to search: "
         contact_search = gets.chomp.to_i
         search_result = search_by_contact(contact_search)
@@ -66,7 +68,7 @@ class Address < AddressManager
           puts "#{info['id']}           #{info['name']}             #{info['contact']}               #{info['address']}"
         end
         break
-      when 3
+      when map_search_menu_choice("search_by_address")
         puts "Enter address to search: "
         address_search = gets.chomp
         search_result = search_by_address(address_search)
@@ -76,13 +78,13 @@ class Address < AddressManager
           puts "#{info['id']}           #{info['name']}             #{info['contact']}               #{info['address']}"
         end
         break
-      when 4
+      when map_search_menu_choice("exit_searching")
         break
       else
         puts "Invalid Editing Choice"
       end
 
-      break if choice == 4
+      break if choice == map_search_menu_choice("exit_searching")
     end
   end
 
@@ -101,22 +103,22 @@ class Address < AddressManager
       choice = gets.chomp.to_i
 
       case choice
-      when 1
+      when map_update_menu_choice("update_by_name")
         puts "Enter new Name: "
         new_name = gets.chomp
         update_name(id, new_name)
         break
-      when 2
+      when map_update_menu_choice("update_by_contact")
         puts "Enter new Contact: "
         new_contact = gets.chomp
         update_contact(id, new_contact)
         break
-      when 3
+      when map_update_menu_choice("update_by_address")
         puts "Enter new Address: "
         new_address = gets.chomp
         update_address(id, new_address)
         break
-      when 4
+      when map_update_menu_choice("update_all")
         puts "Enter new Name: "
         new_name = gets.chomp 
         puts "Enter new Contact: "
@@ -127,13 +129,13 @@ class Address < AddressManager
         update_contact(id, new_contact)
         update_address(id, new_address)
         break
-      when 5
+      when map_update_menu_choice("exit_updating")
         break
       else
         puts "Invalid Editing Choice"
       end
 
-      break if choice == 5
+      break if choice == map_update_menu_choice("exit_updating")
     end
   end
 end

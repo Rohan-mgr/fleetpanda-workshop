@@ -1,4 +1,6 @@
 require "./address.rb"
+require "./helper.rb"
+extend Helper
 
 loop do
   puts "************ Address Book Menu ****************"
@@ -13,17 +15,17 @@ loop do
   choice = gets.chomp.to_i
 
   case choice
-  when 1
+  when  map_main_menu_choice("add_address_book")
     Address.initialize_add_address
-  when 2
+  when map_main_menu_choice("delete_address_book")
     Address.initialize_delete_address
-  when 3
+  when map_main_menu_choice("display_all_address_books")
     Address.initialize_display_address
-  when 4
+  when map_main_menu_choice("update_address_book")
     Address.initialize_update_address
-  when 5
+  when map_main_menu_choice("search_contacts")
     Address.initialize_contact_search
-  when 6
+  when map_main_menu_choice("exit")
     break
   else
     puts "Invalid choice!"
@@ -32,5 +34,5 @@ loop do
   puts "\n********* Press Enter to continue *************"
   gets.chomp
   system "clear"
-  break if choice == 6
+  break if choice == map_main_menu_choice("exit")
 end
