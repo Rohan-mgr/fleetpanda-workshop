@@ -11,6 +11,24 @@
       "name": "Bipin Thapa",
       "contact": "986532107",
       "address": "Swoyambhu"
+    },
+    {
+      "id": "01910bfb-5bae-709c-9fc8-23e2ac5571b6",
+      "name": "Aayush Khatiwada",
+      "contact": 9812345670,
+      "address": "Itahari"
+    },
+    {
+      "id": "01910bfb-c0e1-7020-9aa0-80b9287dd32d",
+      "name": "Sandesh Bist\t",
+      "contact": 9806543217,
+      "address": "Kalopul"
+    },
+    {
+      "id": "01910bfc-47e4-7e9b-99c6-47631ed84e5c",
+      "name": "Rohan Shrestha",
+      "contact": 9811234567,
+      "address": "Kamalpokhari"
     }
   ]
 }

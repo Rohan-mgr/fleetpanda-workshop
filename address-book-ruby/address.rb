@@ -34,6 +34,58 @@ class Address < AddressManager
     display_address
   end
 
+  def self.initialize_contact_search
+    loop do
+      puts "\n*********** Choose how you want to search ***********"
+      puts "1. Search by name"
+      puts "2. Search by contact"
+      puts "3. Search by address"
+      puts "4. Exit Searching"
+
+      puts "Please choose editing action: "
+      choice = gets.chomp.to_i
+
+      case choice
+      when 1
+        puts "Enter name to search: "
+        name_search = gets.chomp
+        search_result = search_by_name(name_search)
+        puts "========================================== Address Book Search Records ========================================="
+        puts "                Id                                Name                 Contact                  Address\n"
+        search_result.each do |info|
+          puts "#{info['id']}           #{info['name']}             #{info['contact']}               #{info['address']}"
+        end
+        break
+      when 2
+        puts "Enter contact to search: "
+        contact_search = gets.chomp.to_i
+        search_result = search_by_contact(contact_search)
+        puts "========================================== Address Book Search Records ========================================="
+        puts "                Id                                Name                 Contact                  Address\n"
+        search_result.each do |info|
+          puts "#{info['id']}           #{info['name']}             #{info['contact']}               #{info['address']}"
+        end
+        break
+      when 3
+        puts "Enter address to search: "
+        address_search = gets.chomp
+        search_result = search_by_address(address_search)
+        puts "========================================== Address Book Search Records ========================================="
+        puts "                Id                                Name                 Contact                  Address\n"
+        search_result.each do |info|
+          puts "#{info['id']}           #{info['name']}             #{info['contact']}               #{info['address']}"
+        end
+        break
+      when 4
+        break
+      else
+        puts "Invalid Editing Choice"
+      end
+
+      break if choice == 4
+    end
+  end
+
   def self.initialize_update_address
     puts "Enter address Id to update: "
     id = gets.chomp
