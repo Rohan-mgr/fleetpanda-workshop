@@ -135,5 +135,4 @@ class AddressManager
     end
     searched_address_results
   end
-
 end
