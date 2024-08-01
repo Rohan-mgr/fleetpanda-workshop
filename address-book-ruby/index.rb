@@ -6,7 +6,8 @@ loop do
   puts "2. Delete your address book"
   puts "3. Display all your address book"
   puts "4. Update your address book"
-  puts "5. Exit"
+  puts "5. Search contacts"
+  puts "6. Exit"
 
   puts "Enter your choice of action: "
   choice = gets.chomp.to_i
@@ -21,6 +22,8 @@ loop do
   when 4
     Address.initialize_update_address
   when 5
+    Address.initialize_contact_search
+  when 6
     break
   else
     puts "Invalid choice!"
@@ -29,5 +32,5 @@ loop do
   puts "\n********* Press Enter to continue *************"
   gets.chomp
   system "clear"
-  break if choice == 5
+  break if choice == 6
 end

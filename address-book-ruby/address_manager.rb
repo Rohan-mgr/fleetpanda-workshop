@@ -93,4 +93,47 @@ class AddressManager
     File.write(FILE_PATH, JSON.pretty_generate(data))
     puts "Address updated successfully";
   end
+
+  def self.search_by_name(name_search)
+    if File.exist?(FILE_PATH) && !File.zero?(FILE_PATH)
+      file = File.open(FILE_PATH, "r")
+      data = JSON.load(file)
+      file.close
+    else
+      data = { 'records' => [] } 
+    end
+    searched_name_results = data['records'].select do |info| 
+      info['name'].downcase.split(" ").include?(name_search.downcase)
+    end
+    searched_name_results
+  end
+
+  def self.search_by_contact(contact_search)
+    if File.exist?(FILE_PATH) && !File.zero?(FILE_PATH)
+      file = File.open(FILE_PATH, "r")
+      data = JSON.load(file)
+      file.close
+    else
+      data = { 'records' => [] } 
+    end
+    searched_contact_results = data['records'].select do |info| 
+      info['contact'] == contact_search
+    end
+    searched_contact_results
+  end
+
+  def self.search_by_address(address_search)
+    if File.exist?(FILE_PATH) && !File.zero?(FILE_PATH)
+      file = File.open(FILE_PATH, "r")
+      data = JSON.load(file)
+      file.close
+    else
+      data = { 'records' => [] } 
+    end
+    searched_address_results = data['records'].select do |info| 
+      info['address'].downcase == address_search.downcase
+    end
+    searched_address_results
+  end
+
 end
