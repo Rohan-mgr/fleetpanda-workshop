@@ -2,7 +2,9 @@ export function toggleNavLinks() {
   const authButtonsWrapper = document.querySelector(".auth__btns__wrapper");
   const blogsBtnWrapper = document.querySelector(".blogs");
   const logoutBtnWrapper = document.querySelector(".logout__btn__wrapper");
-  if (localStorage.getItem("loginToken")) {
+
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  if (loggedUser?.token) {
     authButtonsWrapper.style.display = "none";
     blogsBtnWrapper.style.display = "flex";
     logoutBtnWrapper.style.display = "block";
@@ -36,7 +38,7 @@ export function renderBlogDetails(blog) {
     <div class="blogs__details__card">
         <div class="blog__details__img__wrapper">
           <img
-            src="${blog.image}"
+            src="https://www.shutterstock.com/image-vector/financial-news-trading-stock-impulses-600nw-2281259029.jpg"
             alt="blog-img"
           />
         </div>
@@ -44,11 +46,10 @@ export function renderBlogDetails(blog) {
         <div class="blog__details__header__wrapper">
         <h1>${blog.title}</h1>
         <div style="display: flex; gap: 1rem; font-weight: 600;">
-          <p>Updated At: ${blog.updatedAt}</p>
+          <p>Blog Created: ${blog.created_at}</p>
           <p>Status: ${blog.status}</p>
         </div>
         </div>
-          <p style="font-weight: 600; margin-bottom: 1rem;">Category: ${blog.category}</p>
           <p>${blog.content}</p>
         </div>
       </div>
@@ -79,24 +80,30 @@ export function renderBlogsCard(blogs) {
         <div class="card">
           <div class="card__img__wrapper">
             <img
-              src='${blog.image}'
+              src='https://www.shutterstock.com/image-vector/financial-news-trading-stock-impulses-600nw-2281259029.jpg'
               alt="card-img"
             />
           </div>
           <div class="card__content">
             <p>
-              ${blog.title.substr(0, 20)}
+              ${blog.title.substr(0, 60)}
             </p>
             <p>
               ${blog.content.substr(
                 0,
-                200
-              )} ... <a href='/website/app/blogDetails.html?postId=${
+                300
+              )} ... <a href='/website/app/blogDetails.html?blogId=${
       blog.id
     }' id="read__more">Read More</a>
             </p>
           </div>
         </div>
         `;
+  });
+}
+
+export function renderOrganizationsDropDown(orgs) {
+  return orgs.map((org) => {
+    return `<option value=${org.id}>${org.name}</option>`;
   });
 }
