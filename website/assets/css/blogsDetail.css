@@ -36,7 +36,7 @@
 }
 
 .blog__details__btn__wrapper {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   gap: 2rem;

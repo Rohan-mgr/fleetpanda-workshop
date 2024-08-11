@@ -75,8 +75,13 @@ export function renderBlogComments(comments) {
 }
 
 export function renderBlogsCard(blogs) {
-  return blogs.map((blog) => {
-    return `
+  if (blogs.length < 1) {
+    return `<p>No blogs created for this organization</p>`;
+  }
+  return blogs
+    .map((blog) => {
+      if (blog.status === "published") {
+        return `
         <div class="card">
           <div class="card__img__wrapper">
             <img
@@ -93,13 +98,15 @@ export function renderBlogsCard(blogs) {
                 0,
                 300
               )} ... <a href='/website/app/blogDetails.html?blogId=${
-      blog.id
-    }' id="read__more">Read More</a>
+          blog.id
+        }' id="read__more">Read More</a>
             </p>
           </div>
         </div>
         `;
-  });
+      }
+    })
+    .join("");
 }
 
 export function renderOrganizationsDropDown(orgs) {

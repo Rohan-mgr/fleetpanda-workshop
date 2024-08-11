@@ -19,7 +19,11 @@ const blogId = parsedUrl.searchParams.get("blogId");
 
 const blogDetailsWrapper = document.querySelector(".blog__details__wrapper");
 const blogCommentsWrapper = document.querySelector(".comment__wrapper__list");
+const blogDetailActionBtn = document.querySelector(
+  ".blog__details__btn__wrapper"
+);
 
+const loggedInfo = JSON.parse(localStorage.getItem("loggedUser"));
 async function getPostDetails() {
   try {
     let response = await axios.get(`/blogs/${+blogId}`);
@@ -27,8 +31,15 @@ async function getPostDetails() {
       throw new Error("Failed to fetch blog details");
     }
     console.log(response, ">>>>>");
-    let { blog } = response?.data;
+    const { blog } = response?.data;
     blogDetailsWrapper.innerHTML = renderBlogDetails(blog);
+    const blogCreatorId = blog.user_id;
+    const loggedUserId = loggedInfo.loggedUser.id;
+    if (blogCreatorId === loggedUserId) {
+      blogDetailActionBtn.style.display = "flex";
+    } else {
+      blogDetailActionBtn.style.display = "none";
+    }
   } catch (error) {
     throw error;
   }

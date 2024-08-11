@@ -3,14 +3,17 @@ import {
   logOut,
   renderBlogsCard,
   toggleHamburgerMenu,
+  renderOrganizationsDropDown,
 } from "./helper.js";
+
+axios.defaults.baseURL = "http://localhost:3000";
 
 toggleNavLinks();
 toggleHamburgerMenu();
 
 const orgName = document.querySelector("#organization__name");
+const loggedInfo = JSON.parse(localStorage.getItem("loggedUser"));
 function getOrganizationName() {
-  const loggedInfo = JSON.parse(localStorage.getItem("loggedUser"));
   const org = loggedInfo.organization.name;
   orgName.innerHTML = org;
 }
@@ -19,13 +22,11 @@ getOrganizationName();
 const logoutBtn = document.querySelector(".logout__btn__wrapper");
 logoutBtn.addEventListener("click", logOut);
 
-axios.defaults.baseURL = "http://localhost:3000";
-
 const cardsWrapper = document.querySelector(".cards__wrapper");
-
 async function fetchPosts() {
   try {
-    let response = await axios.get("/blogs");
+    const organizationId = loggedInfo.organization.id;
+    let response = await axios.get(`/blogs?organization_id=${organizationId}`);
     if (response.status !== 200) {
       throw new Error("Failed to fetch blogs");
     }
@@ -55,6 +56,8 @@ window.onclick = function (event) {
 const addNewArticleForm = document.querySelector("#add_new__article");
 
 addNewArticleForm.addEventListener("submit", handleAddNewArticle);
+const organizationInput = document.querySelector("#organization");
+organizationInput.value = loggedInfo.organization.name;
 
 async function handleAddNewArticle(event) {
   event.preventDefault();
@@ -62,7 +65,12 @@ async function handleAddNewArticle(event) {
   const title = document.querySelector("#title").value;
   const content = document.querySelector("#content").value;
 
-  const payload = { status, title, content };
+  const payload = {
+    status,
+    title,
+    content,
+    organization_id: +loggedInfo.organization.id,
+  };
 
   try {
     let response = await axios.post("/blogs", payload);
