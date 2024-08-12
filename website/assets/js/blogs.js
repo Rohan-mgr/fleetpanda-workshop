@@ -69,6 +69,7 @@ async function handleAddNewArticle(event) {
     status,
     title,
     content,
+    user_id: +loggedInfo.loggedUser.id,
     organization_id: +loggedInfo.organization.id,
   };
 
