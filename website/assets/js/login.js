@@ -12,7 +12,7 @@ toggleNavLinks();
 toggleHamburgerMenu();
 fetchOrganization();
 
-const logoutBtn = document.querySelector(".logout__btn__wrapper");
+const logoutBtn = document.querySelector(".logout__btn");
 logoutBtn.addEventListener("click", logOut);
 
 const loginForm = document.querySelector("#login__form");

@@ -3,7 +3,6 @@ import {
   logOut,
   renderBlogsCard,
   toggleHamburgerMenu,
-  renderOrganizationsDropDown,
 } from "./helper.js";
 
 axios.defaults.baseURL = "http://localhost:3000";
@@ -11,15 +10,15 @@ axios.defaults.baseURL = "http://localhost:3000";
 toggleNavLinks();
 toggleHamburgerMenu();
 
-const orgName = document.querySelector("#organization__name");
 const loggedInfo = JSON.parse(localStorage.getItem("loggedUser"));
+const orgName = document.querySelector("#organization__name");
 function getOrganizationName() {
   const org = loggedInfo.organization.name;
   orgName.innerHTML = org;
 }
 getOrganizationName();
 
-const logoutBtn = document.querySelector(".logout__btn__wrapper");
+const logoutBtn = document.querySelector(".logout__btn");
 logoutBtn.addEventListener("click", logOut);
 
 const cardsWrapper = document.querySelector(".cards__wrapper");
@@ -54,10 +53,7 @@ window.onclick = function (event) {
 };
 
 const addNewArticleForm = document.querySelector("#add_new__article");
-
 addNewArticleForm.addEventListener("submit", handleAddNewArticle);
-const organizationInput = document.querySelector("#organization");
-organizationInput.value = loggedInfo.organization.name;
 
 async function handleAddNewArticle(event) {
   event.preventDefault();

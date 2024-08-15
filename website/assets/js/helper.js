@@ -7,7 +7,7 @@ export function toggleNavLinks() {
   if (loggedUser?.token) {
     authButtonsWrapper.style.display = "none";
     blogsBtnWrapper.style.display = "flex";
-    logoutBtnWrapper.style.display = "block";
+    logoutBtnWrapper.style.display = "flex";
   } else {
     authButtonsWrapper.style.display = "flex";
     blogsBtnWrapper.style.display = "none";
@@ -57,21 +57,47 @@ export function renderBlogDetails(blog) {
 }
 
 export function renderBlogComments(comments) {
+  if (comments.length < 1) {
+    return `<p>No comments posted yet!</p>`;
+  }
   return comments
     .map((comment) => {
       return `
         <div class="comment__wrapper">
           <div class="comment__header__wrapper">
-            <h3>${comment.name}</h3>
+            <h3>${comment.commenter.fullname}</h3>
           </div>
           <p>
             ${comment.body}
           </p>
-          <p>- ${comment.email}</p>
         </div>
       `;
     })
     .join("");
+}
+
+export function renderLoggedUserInfo(user) {
+  const loggedUserContainer = document.querySelector(".profile__logged__user");
+  loggedUserContainer.innerHTML = `
+    <h3>${user.fullname}</h3>
+    <p>${user.email}</p>
+  `;
+}
+
+export function renderProfileDetails(profile, isMyProfile = false) {
+  if (!profile) {
+    return isMyProfile
+      ? "<h2>Please add your profile details</h2>"
+      : "<h2>User profile details is not available</h2>";
+  }
+  return `
+    <h2>Gender: ${profile.gender}</h2>
+    <h2>Address: ${profile.address}</h2>
+    <h2>Age: ${profile.age}</h2>
+    <h2>Contanct: ${profile.contact}</h2>
+    <h2>Country: ${profile.country}</h2>
+    <h2>Date of Birth: ${profile.dob}</h2>
+  `;
 }
 
 export function renderBlogsCard(blogs) {
@@ -109,8 +135,53 @@ export function renderBlogsCard(blogs) {
     .join("");
 }
 
+export function renderUserCards(users) {
+  return users
+    .map((user) => {
+      return `
+      <div class="card">
+          <div class="card__img__wrapper">
+            <img
+              src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
+              alt="card-img"
+            />
+          </div>
+          <div class="card__content">
+            <p>${user.fullname}</p>
+            <p>${user.email}</p>
+          </div>
+          <a href='/website/app/usersDetails.html?user_id=${+user.id}' class="btn btn-primary">View Profile</a>
+        </div>
+    `;
+    })
+    .join("");
+}
+
 export function renderOrganizationsDropDown(orgs) {
   return orgs.map((org) => {
     return `<option value=${org.id}>${org.name}</option>`;
   });
+}
+
+export function getEditStatus(status) {
+  switch (status.toLowerCase()) {
+    case "published":
+      return 0;
+    case "hidden":
+      return 1;
+    case "archived":
+      return 2;
+    default:
+      return 0;
+  }
+}
+export function getEditGender(gender) {
+  switch (gender.toLowerCase()) {
+    case "male":
+      return 0;
+    case "female":
+      return 1;
+    default:
+      return 0;
+  }
 }

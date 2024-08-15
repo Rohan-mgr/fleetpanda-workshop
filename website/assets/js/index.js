@@ -9,7 +9,7 @@ import { toggleNavLinks, logOut, toggleHamburgerMenu } from "./helper.js";
 toggleNavLinks();
 toggleHamburgerMenu();
 
-const logoutBtn = document.querySelector(".logout__btn__wrapper");
+const logoutBtn = document.querySelector(".logout__btn");
 logoutBtn.addEventListener("click", logOut);
 
 const fullName = document.querySelector("#name");
