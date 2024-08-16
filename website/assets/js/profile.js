@@ -50,6 +50,7 @@ const editContact = document.querySelector("#edit__contact");
 const editDob = document.querySelector("#edit__dob");
 
 const profileDetailsWrapper = document.querySelector(".profile__details");
+const avatar = document.querySelector("#avatar");
 async function getUserDetails() {
   try {
     const userId = loggedInfo.loggedUser.id;
@@ -59,6 +60,7 @@ async function getUserDetails() {
     }
     let { userDetails } = response?.data;
     console.log(userDetails, "user details >>>>>");
+    if (userDetails.avatar) avatar.src = userDetails.avatar;
     profileDetailsWrapper.innerHTML = renderProfileDetails(
       userDetails?.profile,
       true
@@ -168,6 +170,34 @@ async function handleBlogEdit(event) {
       throw new Error("Failed to edit profile");
     }
     location.href = "/website/app/profile.html";
+  } catch (error) {
+    throw error;
+  }
+}
+
+const uploadProfileImg = document.querySelector("#upload-photo");
+uploadProfileImg.addEventListener("change", handleProfileImgUpload);
+
+async function handleProfileImgUpload(event) {
+  const file = event.target.files[0];
+  console.log(file);
+
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  try {
+    let response = await axios.post(
+      `/users/${+userId}/upload_profile`,
+      formData
+    );
+    if (response.status !== 200) {
+      throw new Error("Failed to upload profile picture");
+    }
+    console.log(response, "response>>>>>>");
+    location.href = "/website/app/profile.html";
+    // let { comments } = response?.data;
+    // console.log(comments, "comments >>>>>");
+    // profileCommentsWrapper.innerHTML = renderBlogComments(comments);
   } catch (error) {
     throw error;
   }

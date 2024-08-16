@@ -96,7 +96,7 @@ export function renderProfileDetails(profile, isMyProfile = false) {
     <h2>Age: ${profile.age}</h2>
     <h2>Contanct: ${profile.contact}</h2>
     <h2>Country: ${profile.country}</h2>
-    <h2>Date of Birth: ${profile.dob}</h2>
+    <h2>Date of Birth: ${profile.dob.slice(0, 10)}</h2>
   `;
 }
 
@@ -142,7 +142,11 @@ export function renderUserCards(users) {
       <div class="card">
           <div class="card__img__wrapper">
             <img
-              src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
+              src=${
+                user.avatar
+                  ? user.avatar
+                  : "https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.webp"
+              }
               alt="card-img"
             />
           </div>

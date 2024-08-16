@@ -27,6 +27,7 @@ const userFullname = document.querySelector(".user__fullname");
 const userEmail = document.querySelector(".user__email");
 const profileDetailsWrapper = document.querySelector(".profile__details");
 
+const avatar = document.querySelector("#avatar");
 async function getUserDetails() {
   try {
     let response = await axios.get(`/users/${+userId}/info`);
@@ -35,6 +36,7 @@ async function getUserDetails() {
     }
     const { userDetails } = response?.data;
     console.log(userDetails);
+    if (userDetails?.avatar) avatar.src = userDetails?.avatar;
     userFullname.innerHTML = userDetails.fullname;
     userEmail.innerHTML = userDetails.email;
     profileDetailsWrapper.innerHTML = renderProfileDetails(

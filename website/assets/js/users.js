@@ -31,6 +31,7 @@ async function fetchOrganizationUsers() {
       throw new Error("Failed to fetch users");
     }
     let { users } = response?.data;
+    console.log(users, "users......");
     const filteredUser = users.filter(
       (user) => user.id != +loggedInfo.loggedUser.id
     );

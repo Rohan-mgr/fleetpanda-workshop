@@ -16,6 +16,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../assets/css/profile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/v4-shims.min.css" integrity="sha512-p++g4gkFY8DBqLItjIfuKJPFvTPqcg2FzOns2BNaltwoCOrXMqRIOqgWqWEvuqsj/3aVdgoEo2Y7X6SomTfUPA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- axios cdnjs -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
@@ -81,9 +82,15 @@
           <div class="profile__wrapper">
             <div class="profile__img__wrapper">
               <img
-                src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
-                alt="profile-img"
+              id="avatar"
+              src="https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.webp"
+              alt="profile-img"
+              class="profile-img"
               />
+              <label for="upload-photo" class="upload-label">
+                <input type="file" id="upload-photo" class="file-input" accept="image/*" />
+                <i class="fa-solid fa-camera"></i>
+              </label>
             </div>
             <div class="profile__logged__user"></div>
           </div>

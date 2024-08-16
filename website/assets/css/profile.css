@@ -166,7 +166,13 @@
 
 .profile__img__wrapper {
   text-align: center;
-  height: 35vh;
+  width: fit-content;
+  height: 30vh;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
 }
 .profile__img__wrapper img {
   height: 100%;
@@ -184,6 +190,36 @@
   display: none;
 }
 
+.upload-label {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}
+
+.fa-camera {
+  font-size: 1rem;
+  color: #fff;
+  background-color: #000;
+  border-radius: 50%;
+  padding: 10px;
+  position: absolute;
+  bottom: 25px;
+  right: 60px;
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 5px; /* Adjust position as needed */
+  right: 5px; /* Adjust position as needed */
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  z-index: 999;
+}
 .comment__wrapper {
   border-radius: 1rem;
   padding: 15px;

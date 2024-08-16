@@ -74,7 +74,13 @@
 }
 
 .profile__img__wrapper {
-  height: 35vh;
+  text-align: center;
+  width: fit-content;
+  height: 30vh;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
 }
 .profile__img__wrapper img {
   height: 100%;
@@ -175,6 +181,7 @@
   flex-direction: column;
   justify-content: center;
   padding: 0 2rem;
+  gap: 2rem;
 }
 
 .comment__wrapper {
