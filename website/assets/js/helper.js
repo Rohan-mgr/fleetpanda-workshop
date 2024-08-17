@@ -46,7 +46,7 @@ export function renderBlogDetails(blog) {
         <div class="blog__details__header__wrapper">
         <h1>${blog.title}</h1>
         <div style="display: flex; gap: 1rem; font-weight: 600;">
-          <p>Blog Created: ${blog.created_at}</p>
+          <p>Blog Created: ${blog.created_at.toLocaleString().slice(0, 10)}</p>
           <p>Status: ${blog.status}</p>
         </div>
         </div>
@@ -64,12 +64,25 @@ export function renderBlogComments(comments) {
     .map((comment) => {
       return `
         <div class="comment__wrapper">
-          <div class="comment__header__wrapper">
-            <h3>${comment.commenter.fullname}</h3>
-          </div>
-          <p>
-            ${comment.body}
-          </p>
+          <div class="comment__content__wrapper">
+            <div class="comment__profile__img__wrapper">
+              <img src=${
+                comment.commenter.avatar
+                  ? `http://localhost:3000/${comment.commenter.avatar}`
+                  : "https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.webp"
+              } alt="profile-pic" />
+            </div>
+            <div class="comment__commenter">
+              <h3>${comment.commenter.fullname}</h3>
+              <p>${comment.commenter.email}</p>
+            </div>
+            <p style="position: absolute; top: 15px; right: 15px; color: #8e8686">Commented on: ${comment.created_at
+              .toLocaleString()
+              .slice(0, 10)}</p>
+            </div>
+            <p>
+              ${comment.body}
+            </p>
         </div>
       `;
     })
