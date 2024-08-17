@@ -1,12 +1,18 @@
 import { validateEmail, validatePassword } from "./validation.js";
-import { toggleNavLinks, logOut, toggleHamburgerMenu } from "./helper.js";
+import {
+  toggleNavLinks,
+  logOut,
+  toggleHamburgerMenu,
+  renderOrganizationsDropDown,
+} from "./helper.js";
 
-axios.defaults.baseURL = "https://reqres.in";
+axios.defaults.baseURL = "http://localhost:3000";
 
 toggleNavLinks();
 toggleHamburgerMenu();
+fetchOrganization();
 
-const logoutBtn = document.querySelector(".logout__btn__wrapper");
+const logoutBtn = document.querySelector(".logout__btn");
 logoutBtn.addEventListener("click", logOut);
 
 const loginForm = document.querySelector("#login__form");
@@ -23,8 +29,21 @@ password.addEventListener("keyup", (e) =>
   validatePassword(e.target.value, loginPasswordErrorMsgTag)
 );
 
-loginForm.addEventListener("submit", handleLoginFormSubmission);
+const selectOrganization = document.querySelector("#organization");
+async function fetchOrganization() {
+  try {
+    let response = await axios.get("/organizations");
+    if (response.status !== 200) {
+      throw new Error("Fetching organizations failed!");
+    }
+    const { data } = response;
+    selectOrganization.innerHTML = renderOrganizationsDropDown(data);
+  } catch (error) {
+    throw error;
+  }
+}
 
+loginForm.addEventListener("submit", handleLoginFormSubmission);
 async function handleLoginFormSubmission(e) {
   e.preventDefault();
   if (
@@ -34,14 +53,16 @@ async function handleLoginFormSubmission(e) {
     let data = {
       email: email.value,
       password: password.value,
+      organization_id: +selectOrganization.value,
     };
 
     try {
-      let response = await axios.post("/api/login", data);
+      let response = await axios.post("/users/sign_in", data);
       if (response.status !== 200) {
         throw new Error("Login failed!");
       }
-      localStorage.setItem("loginToken", response.data.token);
+      console.log(response, "login resopnse >>>>>");
+      localStorage.setItem("loggedUser", JSON.stringify(response.data));
     } catch (error) {
       throw error;
     }

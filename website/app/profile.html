@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Petroleum | Blogs</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../assets/css/profile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/v4-shims.min.css" integrity="sha512-p++g4gkFY8DBqLItjIfuKJPFvTPqcg2FzOns2BNaltwoCOrXMqRIOqgWqWEvuqsj/3aVdgoEo2Y7X6SomTfUPA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- axios cdnjs -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- navigation -->
+    <div class="navigation">
+      <div class="logo__wrapper">
+        <a href="/website/index.html">
+          <img
+            src="../assets/images/fleedpanda-logo.png"
+            alt="fleetpanda-logo"
+          />
+        </a>
+      </div>
+      <div class="hamburger__menu">
+        <i class="fa-solid fa-bars" style="color: #000000"></i>
+      </div>
+      <!-- <nav class="nav__wrapper"> -->
+      <ul class="nav__link__wrapper">
+        <li>
+          <a href="/website/index.html">Home</a>
+        </li>
+        <li>
+          <a href="#whyus">Why Us</a>
+        </li>
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+        <li>
+          <a href="#newsletter">NewsLetter</a>
+        </li>
+        <li>
+          <a href="#clients">Clients</a>
+        </li>
+        <div class="blogs">
+          <li>
+            <a href="./blogs.html">Blogs</a>
+          </li>
+        </div>
+        <div class="auth__btns__wrapper">
+          <li>
+            <a href="login.html">Login</a>
+          </li>
+          <li>
+            <a href="./signup.html">Sign Up</a>
+          </li>
+        </div>
+        <div class="logout__btn__wrapper">
+          <li>
+            <a href="./users.html">People</a>
+          </li>
+          <li>
+            <a href="./profile.html">My Profile</a>
+          </li>
+          <li class="logout__btn">Logout</li>
+        </div>
+      </ul>
+    </div>
+    <!-- end of navigation? -->
+    <div class="profile__wrapper">
+      <div class="user__details">
+        <div class="profile__content__wrapper">
+          <div class="profile__wrapper">
+            <div class="profile__img__wrapper">
+              <img
+              id="avatar"
+              src="https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.webp"
+              alt="profile-img"
+              class="profile-img"
+              />
+              <label for="upload-photo" class="upload-label">
+                <input type="file" id="upload-photo" class="file-input" accept="image/*" />
+                <i class="fa-solid fa-camera"></i>
+              </label>
+            </div>
+            <div class="profile__logged__user"></div>
+          </div>
+          <div class="profile__action__wrapper">
+            <div class="profile__details">
+            </div>
+            <button class="btn btn-primary" id="add__profile">Add Profile</button>
+            <button class="btn btn-warning" id="edit__profile">Edit Profile</button>
+          </div>
+        </div>
+        <h1>Comments</h1>
+        <div class="comment__wrapper__list"></div>
+      </div>
+
+      
+
+    <!-- ecit profile modal -->
+    <div id="my__modal__edit" class="modal">
+      <div class="modal__content">
+        <span id="close__edit__modal" class="close">&times;</span>
+        <h2>Edit Your Profile Details</h2>
+        <hr />
+        <br />
+        <form id="edit__profile__form">
+          <div>
+            <label for="edit__gender">Gender</label>
+            <select id="edit__gender" name="edit__gender" required>
+              <option value="male" selected>Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label for="edit__address">Address</label>
+            <input
+              type="text"
+              id="edit__address"
+              name="edit__address"
+              autocomplete="off"
+              placeholder="Address"
+              required
+            />
+          </div>
+          <div>
+            <label for="edit__country">Country</label>
+            <input
+              type="text"
+              id="edit__country"
+              name="edit__country"
+              autocomplete="off"
+              placeholder="Country"
+              required
+            />
+          </div>
+          <div>
+            <label for="edit__age">Age</label>
+            <input
+              type="number"
+              id="edit__age"
+              name="edit__age"
+              autocomplete="off"
+              placeholder="Age"
+              required
+            />
+          </div>
+          <div>
+            <label for="edit__contact">Contact</label>
+            <input
+              type="text"
+              id="edit__contact"
+              name="edit__contact"
+              autocomplete="off"
+              placeholder="Contact"
+              required
+            />
+          </div>
+          <div>
+            <label for="edit__dob">Date of Birth</label>
+            <input
+              type="date"
+              id="edit__dob"
+              name="edit__dob"
+              autocomplete="off"
+              placeholder="Date"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Edit Now</button>
+        </form>
+      </div>
+    </div>
+
+     <!-- add profile modal -->
+    <div id="my__modal__add" class="modal">
+      <div class="modal__content">
+        <span id="close__add__modal" class="close">&times;</span>
+        <h2>Add Your Profile Details</h2>
+        <hr />
+        <br />
+        <form id="add__profile__form">
+          <div>
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="male" selected>Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label for="address">Address</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              autocomplete="off"
+              placeholder="Address"
+              required
+            />
+          </div>
+          <div>
+            <label for="country">Country</label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              autocomplete="off"
+              placeholder="Country"
+              required
+            />
+          </div>
+          <div>
+            <label for="age">Age</label>
+            <input
+              type="number"
+              id="age"
+              name="age"
+              autocomplete="off"
+              placeholder="Age"
+              required
+            />
+          </div>
+          <div>
+            <label for="contact">Contact</label>
+            <input
+              type="text"
+              id="contact"
+              name="contact"
+              autocomplete="off"
+              placeholder="Contact"
+              required
+            />
+          </div>
+          <div>
+            <label for="dob">Date of Birth</label>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              autocomplete="off"
+              placeholder="Date"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Add Now</button>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="../assets/js/profile.js"></script>
+  </body>
+</html>

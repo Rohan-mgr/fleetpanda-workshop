@@ -15,7 +15,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="../assets/css/blogs.css" />
+    <link rel="stylesheet" href="../assets/css/users.css" />
     <!-- axios cdnjs -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
@@ -75,63 +75,51 @@
       </ul>
     </div>
     <!-- end of navigation? -->
-    <div class="blogs__wrapper">
-      <h1>Blogs</h1>
-      <div class="blogs__btn__wrapper">
+
+    <div class="peoples__wrapper">
+      <div class="peoples__header__wrapper">
+        <h1>Peoples</h1>
         <h2>
           <strong>Organization:</strong> <span id="organization__name"></span>
         </h2>
-        <button
-          class="btn btn-primary add__new__post__btn"
-          id="open__modal__btn"
-        >
-          + Add New Post
-        </button>
       </div>
       <div class="cards__wrapper"></div>
     </div>
 
-    <div id="my__modal" class="modal">
-      <div class="modal__content">
-        <span class="close">&times;</span>
-        <h2>Add New Blog</h2>
-        <hr />
-        <br />
-        <form id="add_new__article">
-          <div>
-            <label for="status">Status</label>
-            <select id="status" name="status">
-              <option value="published">Published</option>
-              <option value="hidden">Hidden</option>
-              <option value="archived">Archived</option>
-            </select>
-            <!-- <p class="error-msg" id="email-error-msg"></p> -->
-          </div>
+    <!-- <div class="profile__wrapper">
+      <h1>Logged in as:</h1>
+      <div class="profile__logged__user"></div>
 
-          <div>
-            <label for="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              autocomplete="off"
-              placeholder="Title"
-              required
-            />
-            <!-- <p class="error-msg" id="email-error-msg"></p> -->
-          </div>
-          <div>
-            <label for="content">Content</label>
-            <textarea
-              id="content"
-              name="content"
-              placeholder="Your content goes here..."
-            ></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Add Now</button>
-        </form>
+      <div class="profile__comments__wrapper">
+        <div class="comment__header__wrapper">
+          <h1>Comments</h1>
+          <button id="add__blog__comment" class="btn btn-primary">
+            + Add Comment
+          </button>
+        </div>
+        <div class="comment__wrapper__list"></div>
       </div>
-    </div>
-    <script type="module" src="../assets/js/blogs.js"></script>
+
+      <div id="my__modal__comment" class="modal">
+        <div class="modal__content">
+          <span id="close__comment__modal" class="close">&times;</span>
+          <h2>Add Your Comment</h2>
+          <hr />
+          <br />
+          <form id="add_new__comment">
+            <div>
+              <label for="comment">Comment</label>
+              <textarea
+                id="comment"
+                name="comment"
+                placeholder="Your Comment goes here..."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+          </form>
+        </div>
+      </div>
+    </div> -->
+    <script type="module" src="../assets/js/users.js"></script>
   </body>
 </html>

@@ -1,5 +1,4 @@
 export function validateFullName(inputFullName, nameErrorTag) {
-  console.log(inputFullName);
   let nameErrorMsg = "";
   inputFullName = inputFullName.trim();
   if (inputFullName.trim() === "") {
@@ -37,7 +36,6 @@ export function validateEmail(inputEmail, emailErrorTag) {
 }
 
 export function validateContact(inputContact, contactErrorTag) {
-  console.log(inputContact);
   let contactErrorMsg = "";
   inputContact = inputContact.trim();
   if (inputContact.length < 1 || inputContact.trim() === "") {
@@ -88,6 +86,28 @@ export function validatePassword(inputPassword, passwordErrorTag) {
   } else {
     passwordErrorMsg = "";
     passwordErrorTag.innerHTML = passwordErrorMsg;
+    return true;
+  }
+}
+
+export function validateConfirmPassword(
+  inputPassword,
+  confirmPasswordErrorTag,
+  previousPassword
+) {
+  let confirmPasswordErrorMsg = "";
+  inputPassword = inputPassword.trim();
+  if (inputPassword.trim() === "") {
+    confirmPasswordErrorMsg = "Please enter your password";
+    confirmPasswordErrorTag.innerHTML = confirmPasswordErrorMsg;
+    return false;
+  } else if (inputPassword !== previousPassword) {
+    confirmPasswordErrorMsg = "Password do not match";
+    confirmPasswordErrorTag.innerHTML = confirmPasswordErrorMsg;
+    return false;
+  } else {
+    confirmPasswordErrorMsg = "";
+    confirmPasswordErrorTag.innerHTML = confirmPasswordErrorMsg;
     return true;
   }
 }

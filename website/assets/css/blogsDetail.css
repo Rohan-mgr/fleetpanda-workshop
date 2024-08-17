@@ -34,6 +34,40 @@
 .nav__link__wrapper li > a:hover {
   color: #fa6400;
 }
+
+.blog__details__btn__wrapper {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #fff;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: #fa6400;
+  padding: 10px;
+}
+.btn-danger {
+  background-color: red;
+  color: #fff;
+  padding: 10px;
+}
+.btn-warning {
+  background-color: #ffc107;
+  color: #fff;
+  padding: 10px;
+}
+
 .hamburger__menu {
   display: none;
   font-size: 25px;
@@ -47,8 +81,80 @@
 .blogs {
   font-weight: 500;
   cursor: pointer;
+  gap: 2rem;
 }
 /* end of navigation styling */
+
+/* modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal__content {
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* modal */
+
+/* form */
+#edit__article label,
+#add_new__comment label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+#edit__article input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 0.58rem;
+  border: 1px solid #000;
+}
+#edit__article textarea,
+#add_new__comment textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 0.58rem;
+  border: 1px solid #000;
+  height: 35vh;
+}
+#edit__article select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 0.58rem;
+  border: 1px solid #000;
+}
+/* form */
 
 .blog__comments__wrapper {
   margin-top: 1rem;
@@ -86,6 +192,7 @@
   padding: 15px;
   border: 2px solid #ccc;
   margin: 10px 0;
+  position: relative;
 }
 .comment__wrapper p:nth-child(3) {
   text-align: right;
@@ -94,7 +201,28 @@
 }
 
 .comment__header__wrapper {
-  margin: 10px 0;
+  margin: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment__content__wrapper {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.comment__profile__img__wrapper {
+  height: 6vh;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.comment__profile__img__wrapper img {
+  height: 100%;
 }
 @media screen and (max-width: 1270px) {
   .nav__link__wrapper {

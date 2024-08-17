@@ -47,6 +47,7 @@
 .blogs {
   font-weight: 500;
   cursor: pointer;
+  gap: 2rem;
 }
 /* end of navigation styling */
 
@@ -112,6 +113,16 @@
   border-radius: 0.58rem;
   border: 1px solid #000;
 }
+
+#signup__form select,
+#login__form select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 0.58rem;
+  border: 1px solid #000;
+}
+
 .error-msg {
   text-align: left;
   color: red;

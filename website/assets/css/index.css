@@ -46,6 +46,7 @@ html {
 .blogs {
   font-weight: 500;
   cursor: pointer;
+  gap: 2rem;
 }
 .hamburger__menu {
   display: none;

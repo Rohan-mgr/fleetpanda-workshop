@@ -53,7 +53,7 @@
         </li>
         <div class="blogs">
           <li>
-            <a href="./app/blogs.html">Blogs</a>
+            <a href="./blogs.html">Blogs</a>
           </li>
         </div>
         <div class="auth__btns__wrapper">
@@ -65,7 +65,13 @@
           </li>
         </div>
         <div class="logout__btn__wrapper">
-          <li>Logout</li>
+          <li>
+            <a href="./users.html">People</a>
+          </li>
+          <li>
+            <a href="./profile.html">My Profile</a>
+          </li>
+          <li class="logout__btn">Logout</li>
         </div>
       </ul>
     </div>
@@ -75,6 +81,13 @@
       <form id="login__form">
         <div class="form__header">
           <h1>Login</h1>
+        </div>
+        <div>
+          <label for="organization">0rganization</label>
+          <select id="organization" name="organization">
+            <option value="">Choose your organization</option>
+          </select>
+          <!-- <p class="error-msg" id="email-error-msg"></p> -->
         </div>
         <div>
           <label for="email">Email</label>
