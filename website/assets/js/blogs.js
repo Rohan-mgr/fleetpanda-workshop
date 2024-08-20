@@ -1,3 +1,4 @@
+import { createBlogs, getAllBlogs } from "../../query/blogs.js";
 import {
   toggleNavLinks,
   logOut,
@@ -25,12 +26,20 @@ const cardsWrapper = document.querySelector(".cards__wrapper");
 async function fetchPosts() {
   try {
     const organizationId = loggedInfo.organization.id;
-    let response = await axios.get(`/blogs?organization_id=${organizationId}`);
+
+    const query = getAllBlogs;
+    const variables = { orgId: organizationId };
+
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to fetch blogs");
     }
-    let { data } = response;
-    cardsWrapper.innerHTML = renderBlogsCard(data);
+    let { blogs } = response?.data?.data;
+    console.log(blogs, "data >>>>>>");
+    cardsWrapper.innerHTML = renderBlogsCard(blogs);
   } catch (error) {
     throw error;
   }
@@ -61,7 +70,8 @@ async function handleAddNewArticle(event) {
   const title = document.querySelector("#title").value;
   const content = document.querySelector("#content").value;
 
-  const payload = {
+  const query = createBlogs;
+  const variables = {
     status,
     title,
     content,
@@ -70,7 +80,10 @@ async function handleAddNewArticle(event) {
   };
 
   try {
-    let response = await axios.post("/blogs", payload);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to add blogs");
     }
