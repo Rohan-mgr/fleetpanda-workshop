@@ -22,3 +22,16 @@ export const createBlogs = `
     }
   }   
 `;
+
+export const getBlogDetails = `
+  query GetBlogDetails($blogId: ID!) {
+    blogDetails(blogId: $blogId) {
+      id
+      title
+      content
+      status
+      createdAt
+      userId
+    }
+  }
+`;

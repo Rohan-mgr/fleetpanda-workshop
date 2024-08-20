@@ -1,3 +1,5 @@
+import { getBlogDetails } from "../../query/blogs.js";
+import { getCommentsQuery } from "../../query/comments.js";
 import {
   toggleNavLinks,
   logOut,
@@ -31,18 +33,25 @@ const blogDetailActionBtn = document.querySelector(
 const loggedInfo = JSON.parse(localStorage.getItem("loggedUser"));
 async function getPostDetails() {
   try {
-    let response = await axios.get(`/blogs/${+blogId}`);
+    const query = getBlogDetails;
+    const variables = { blogId: +blogId };
+
+    const response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
+    console.log(response);
     if (response.status !== 200) {
       throw new Error("Failed to fetch blog details");
     }
-    const { blog } = response?.data;
-    blogDetailsWrapper.innerHTML = renderBlogDetails(blog);
+    const { blogDetails } = response?.data?.data;
+    blogDetailsWrapper.innerHTML = renderBlogDetails(blogDetails);
 
-    editStatus.selectedIndex = getEditStatus(blog.status);
-    editTitle.value = blog.title;
-    editContent.value = blog.content;
+    editStatus.selectedIndex = getEditStatus(blogDetails.status);
+    editTitle.value = blogDetails.title;
+    editContent.value = blogDetails.content;
 
-    const blogCreatorId = blog.user_id;
+    const blogCreatorId = blogDetails.userId;
     const loggedUserId = loggedInfo.loggedUser.id;
     if (blogCreatorId === loggedUserId) {
       blogDetailActionBtn.style.display = "flex";
@@ -58,12 +67,18 @@ getPostComments();
 
 async function getPostComments() {
   try {
-    let response = await axios.get(`/blogs/${+blogId}/comments`);
+    const query = getCommentsQuery("blog");
+    const variables = { blogId: +blogId };
+
+    const response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to fetch post comments");
     }
-    let { comments } = response?.data;
-    console.log(comments, "comments >>>>>");
+    const { comments } = response?.data?.data?.blogComments;
+    console.log(comments, "blog comments >>>>>");
     blogCommentsWrapper.innerHTML = renderBlogComments(comments);
   } catch (error) {
     throw error;

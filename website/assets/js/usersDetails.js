@@ -1,3 +1,4 @@
+import { getCommentsQuery } from "../../query/comments.js";
 import {
   logOut,
   renderBlogComments,
@@ -50,12 +51,15 @@ getUserDetails();
 
 async function getUserProfileComments() {
   try {
-    let response = await axios.get(`/users/${+userId}/comments`);
-    if (response.status !== 200) {
-      throw new Error("Failed to fetch post comments");
-    }
-    let { comments } = response?.data;
-    console.log(comments, "comments >>>>>");
+    const query = getCommentsQuery("user");
+    const variables = { userId: +userId };
+
+    const response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
+    const { comments } = response?.data?.data?.blogComments;
+    console.log(comments, "user details comments >>>>>");
     profileCommentsWrapper.innerHTML = renderBlogComments(comments);
   } catch (error) {
     throw error;

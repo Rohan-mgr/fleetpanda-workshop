@@ -46,7 +46,7 @@ export function renderBlogDetails(blog) {
         <div class="blog__details__header__wrapper">
         <h1>${blog.title}</h1>
         <div style="display: flex; gap: 1rem; font-weight: 600;">
-          <p>Blog Created: ${blog.created_at.toLocaleString().slice(0, 10)}</p>
+          <p>Blog Created: ${blog.createdAt.toLocaleString().slice(0, 10)}</p>
           <p>Status: ${blog.status}</p>
         </div>
         </div>
@@ -76,7 +76,7 @@ export function renderBlogComments(comments) {
               <h3>${comment.commenter.fullname}</h3>
               <p>${comment.commenter.email}</p>
             </div>
-            <p style="position: absolute; top: 15px; right: 15px; color: #8e8686">Commented on: ${comment.created_at
+            <p style="position: absolute; top: 15px; right: 15px; color: #8e8686">Commented on: ${comment.createdAt
               .toLocaleString()
               .slice(0, 10)}</p>
             </div>
