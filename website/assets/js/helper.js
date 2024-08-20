@@ -50,7 +50,7 @@ export function renderBlogDetails(blog) {
           <p>Status: ${blog.status}</p>
         </div>
         </div>
-          <p>${blog.content}</p>
+          <p style="text-align: justify">${blog.content}</p>
         </div>
       </div>
     `;
