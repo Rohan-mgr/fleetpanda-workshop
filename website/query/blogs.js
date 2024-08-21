@@ -10,8 +10,8 @@ export const getAllBlogs = `
     `;
 
 export const createBlogs = `
-  mutation CreateBlog($title: String!, $status: BlogStatusEnum!, $content: String!, $user_id: ID!, $organization_id: ID!) {
-    createBlog(input:{status: $status, title: $title, content: $content, userId: $user_id, organizationId: $organization_id}) {
+  mutation CreateBlog($blogInfo: BlogInput!) {
+    createBlog(input: {blogInfo: $blogInfo}) {
       blog {
         id
         title
@@ -20,7 +20,7 @@ export const createBlogs = `
       }
       errors
     }
-  }   
+  }  
 `;
 
 export const getBlogDetails = `

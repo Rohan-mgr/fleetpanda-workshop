@@ -5,6 +5,7 @@ import {
   toggleHamburgerMenu,
   renderOrganizationsDropDown,
 } from "./helper.js";
+import { userLogin } from "../../query/users.js";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -50,23 +51,34 @@ async function handleLoginFormSubmission(e) {
     validateEmail(email.value, loginEmailErrorMsgTag) &&
     validatePassword(password.value, loginPasswordErrorMsgTag)
   ) {
-    let data = {
-      email: email.value,
-      password: password.value,
-      organization_id: +selectOrganization.value,
-    };
-
     try {
-      let response = await axios.post("/users/sign_in", data);
+      const query = userLogin;
+      let variables = {
+        loginInfo: {
+          email: email.value,
+          password: password.value,
+          organizationId: +selectOrganization.value,
+        },
+      };
+
+      const response = await axios.post("/graphql", {
+        query,
+        variables,
+      });
       if (response.status !== 200) {
         throw new Error("Login failed!");
       }
       console.log(response, "login resopnse >>>>>");
-      localStorage.setItem("loggedUser", JSON.stringify(response.data));
+      const { session } = response?.data?.data;
+      const sessionInfo = {
+        loggedUser: session.loggedUser,
+        organization: session.organization,
+        token: session.token,
+      };
+      localStorage.setItem("loggedUser", JSON.stringify(sessionInfo));
+      location.href = "/website/app/blogs.html";
     } catch (error) {
       throw error;
     }
-
-    location.href = "/website/app/blogs.html";
   }
 }

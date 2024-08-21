@@ -1,48 +1,32 @@
-export function getCommentsQuery(type = "blog") {
-  switch (type.toLowerCase()) {
-    case "blog":
-      return `
-            query GetComments($blogId: ID!) {
-              blogComments(blogId: $blogId) {
-                comments {
-                  id
-                  body
-                  createdAt
-                  createdBy
-                  commenter {
-                    id
-                    avatar
-                    createdAt
-                    fullname
-                    email
-                  }
-                }
-                errors
-              }
-            }
-            `;
-    case "user":
-      return `
-            query GetComments($userId: ID!) {
-              blogComments(userId: $userId) {
-                comments {
-                  id
-                  body
-                  createdAt
-                  createdBy
-                  commenter {
-                    id
-                    avatar
-                    createdAt
-                    fullname
-                    email
-                  }
-                }
-                errors
-              }
-            }
-        `;
-    default:
-      return "Invalid type!";
+export const getComments = `
+   query GetComments($blogId: ID, $userId: ID) {
+      blogComments(blogId: $blogId, userId: $userId) {
+        comments {
+          id
+          body
+          createdAt
+          createdBy
+          commenter {
+            id
+            avatar
+            createdAt
+            fullname
+            email
+          }
+        }
+        errors
+      }
+    }
+`;
+
+export const createComments = `
+  mutation CreateComment($blogId: ID, $userId: ID, $commentInfo: CommentInput!) {
+    createComment(input: {blogId: $blogId, userId: $userId, commentInfo: $commentInfo}){
+      comment {
+        id
+        body
+      }
+      errors
+    }
   }
-}
+`;

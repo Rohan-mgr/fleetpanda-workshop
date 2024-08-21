@@ -72,11 +72,13 @@ async function handleAddNewArticle(event) {
 
   const query = createBlogs;
   const variables = {
-    status,
-    title,
-    content,
-    user_id: +loggedInfo.loggedUser.id,
-    organization_id: +loggedInfo.organization.id,
+    blogInfo: {
+      status,
+      title,
+      content,
+      userId: +loggedInfo.loggedUser.id,
+      organizationId: +loggedInfo.organization.id,
+    },
   };
 
   try {
@@ -84,6 +86,7 @@ async function handleAddNewArticle(event) {
       query,
       variables,
     });
+    console.log(response, "blogs >>>>");
     if (response.status !== 200) {
       throw new Error("Failed to add blogs");
     }

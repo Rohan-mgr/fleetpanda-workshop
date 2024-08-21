@@ -10,6 +10,7 @@ import {
   toggleHamburgerMenu,
   renderOrganizationsDropDown,
 } from "./helper.js";
+import { createUser } from "../../query/users.js";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -78,16 +79,21 @@ async function handleSignUpFormSubmission(e) {
       password.value
     )
   ) {
-    let payload = {
-      fullName: fullName.value,
-      email: email.value,
-      password: password.value,
-      confirmPassword: confirmPassword.value,
-      organizationId: +selectOrganization.value,
+    const query = createUser;
+    const variables = {
+      userInfo: {
+        fullname: fullName.value,
+        email: email.value,
+        password: password.value,
+        passwordConfirmation: confirmPassword.value,
+        organizationId: +selectOrganization.value,
+      },
     };
-    console.log(payload, "sign up payload");
     try {
-      let response = await axios.post("/users", payload);
+      const response = await axios.post("/graphql", {
+        query,
+        variables,
+      });
       if (response.status !== 200) {
         throw new Error("User Registration failed!");
       }
@@ -96,7 +102,5 @@ async function handleSignUpFormSubmission(e) {
     } catch (error) {
       throw error;
     }
-
-    location.href = "/website/app/login.html";
   }
 }

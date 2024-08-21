@@ -1,5 +1,5 @@
 import { getBlogDetails } from "../../query/blogs.js";
-import { getCommentsQuery } from "../../query/comments.js";
+import { createComments, getComments } from "../../query/comments.js";
 import {
   toggleNavLinks,
   logOut,
@@ -52,8 +52,8 @@ async function getPostDetails() {
     editContent.value = blogDetails.content;
 
     const blogCreatorId = blogDetails.userId;
-    const loggedUserId = loggedInfo.loggedUser.id;
-    if (blogCreatorId === loggedUserId) {
+    const loggedUserId = +loggedInfo.loggedUser.id;
+    if (blogCreatorId == loggedUserId) {
       blogDetailActionBtn.style.display = "flex";
     } else {
       blogDetailActionBtn.style.display = "none";
@@ -67,7 +67,7 @@ getPostComments();
 
 async function getPostComments() {
   try {
-    const query = getCommentsQuery("blog");
+    const query = getComments;
     const variables = { blogId: +blogId };
 
     const response = await axios.post("/graphql", {
@@ -168,15 +168,22 @@ addCommentForm.addEventListener("submit", handleAddComment);
 async function handleAddComment(event) {
   event.preventDefault();
 
-  const payload = {
-    body: comment.value,
-    commenterId: +loggedInfo.loggedUser.id,
+  const query = createComments;
+  const variables = {
+    blogId: +blogId,
+    commentInfo: {
+      body: comment.value,
+      createdBy: +loggedInfo.loggedUser.id,
+    },
   };
 
-  console.log(payload, "comment payload .....");
+  console.log(variables, "comment variables .....");
 
   try {
-    let response = await axios.post(`/blogs/${+blogId}/comments`, payload);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to edit blog");
     }

@@ -1,4 +1,4 @@
-import { getCommentsQuery } from "../../query/comments.js";
+import { getComments } from "../../query/comments.js";
 import {
   getEditGender,
   logOut,
@@ -27,7 +27,7 @@ const profileCommentsWrapper = document.querySelector(
 const userId = loggedInfo.loggedUser.id;
 async function getUserProfileComments() {
   try {
-    const query = getCommentsQuery("user");
+    const query = getComments;
     const variables = { userId: +userId };
 
     const response = await axios.post("/graphql", {
