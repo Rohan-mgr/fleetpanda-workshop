@@ -1,5 +1,11 @@
 import { getComments } from "../../query/comments.js";
 import {
+  createProfile,
+  editProfile,
+  uploadProfile,
+} from "../../query/users.js";
+import {
+  convertImageToBase64,
   getEditGender,
   logOut,
   renderBlogComments,
@@ -120,20 +126,28 @@ const dob = document.querySelector("#dob");
 
 async function handleAddProfile(event) {
   event.preventDefault();
-  const payload = {
-    address: address.value,
-    gender: gender.value,
-    country: country.value,
-    age: age.value,
-    contact: contact.value,
-    dob: dob.value,
+
+  const query = createProfile;
+  const variables = {
+    profileInfo: {
+      address: address.value,
+      gender: gender.value,
+      country: country.value,
+      age: +age.value,
+      contact: contact.value,
+      dob: dob.value,
+      userId: +userId,
+    },
   };
-  console.log(payload, "add profile payload >>>>>");
   try {
-    let response = await axios.post(`/users/${+userId}/profiles`, payload);
+    const response = await axios.post("graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to add profile");
     }
+    console.log(response);
     location.href = "/website/app/profile.html";
   } catch (error) {
     throw error;
@@ -156,22 +170,29 @@ window.onclick = function (event) {
 };
 
 const editProfileForm = document.querySelector("#edit__profile__form");
-editProfileForm.addEventListener("submit", handleBlogEdit);
+editProfileForm.addEventListener("submit", handleProfileEdit);
 
-async function handleBlogEdit(event) {
+async function handleProfileEdit(event) {
   event.preventDefault();
 
-  const payload = {
-    address: editAddress.value,
-    contact: editContact.value,
-    gender: editGender.value,
-    age: editAge.value,
-    country: editCountry.value,
-    dob: editDob.value,
+  const query = editProfile;
+  const variables = {
+    profileInfo: {
+      address: editAddress.value,
+      contact: editContact.value,
+      gender: editGender.value,
+      age: editAge.value,
+      country: editCountry.value,
+      dob: editDob.value,
+      userId: userId,
+    },
   };
-  console.log(payload, "payload>>>>");
   try {
-    let response = await axios.put(`/users/${+userId}/profiles`, payload);
+    const response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
+    console.log(response, "edit profile reponse>>");
     if (response.status !== 200) {
       throw new Error("Failed to edit profile");
     }
@@ -186,24 +207,28 @@ uploadProfileImg.addEventListener("change", handleProfileImgUpload);
 
 async function handleProfileImgUpload(event) {
   const file = event.target.files[0];
-  console.log(file);
-
-  const formData = new FormData();
-  formData.append("avatar", file);
 
   try {
-    let response = await axios.post(
-      `/users/${+userId}/upload_profile`,
-      formData
-    );
+    let base64ImgUrl = await convertImageToBase64(file);
+    const query = uploadProfile;
+    const variables = {
+      avatarInfo: {
+        avatar: base64ImgUrl,
+        userId: +userId,
+      },
+    };
+    const response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to upload profile picture");
     }
     console.log(response, "response>>>>>>");
     location.href = "/website/app/profile.html";
-    // let { comments } = response?.data;
-    // console.log(comments, "comments >>>>>");
-    // profileCommentsWrapper.innerHTML = renderBlogComments(comments);
+    let { comments } = response?.data;
+    console.log(comments, "comments >>>>>");
+    profileCommentsWrapper.innerHTML = renderBlogComments(comments);
   } catch (error) {
     throw error;
   }

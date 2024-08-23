@@ -31,3 +31,59 @@ export const userLogin = `
     }
   }
 `;
+
+export const createProfile = `
+  mutation CreateProfile($profileInfo: ProfileInput!) {
+    createProfile(input: {profileInfo: $profileInfo}) {
+      profile {
+        id
+        userId
+        gender
+        address
+        dob
+      }
+      errors
+    }
+  }
+`;
+
+export const uploadProfile = `
+  mutation UploadAvatar($avatarInfo: AvatarInput!) {
+    uploadAvatar(input: {avatarInfo: $avatarInfo}) {
+    	avatarUrl
+      errors
+    }
+  }
+`;
+
+export const editProfile = `
+  mutation EditProfile($profileInfo: ProfileInput!) {
+    editProfile(input: {profileInfo: $profileInfo}) {
+      profile{
+        id
+        gender
+        address
+        contact
+        age
+        dob
+        country
+      }
+      errors
+    }
+  }
+`;
+
+export const fetchOrgUsers = `
+  query FetchUser($organizationId: ID!){
+    organizationUsers(organizationId: $organizationId) {
+      users {
+        id
+        avatar
+        fullname
+        email
+        createdAt
+      }
+      errors
+    }
+  }
+`;

@@ -157,7 +157,7 @@ export function renderUserCards(users) {
             <img
               src=${
                 user.avatar
-                  ? user.avatar
+                  ? `http://localhost:3000/${user.avatar}`
                   : "https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.webp"
               }
               alt="card-img"
@@ -201,4 +201,15 @@ export function getEditGender(gender) {
     default:
       return 0;
   }
+}
+
+export function convertImageToBase64(imageFile) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      resolve(reader.result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(imageFile);
+  });
 }
