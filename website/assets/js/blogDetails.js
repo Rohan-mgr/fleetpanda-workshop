@@ -1,4 +1,4 @@
-import { getBlogDetails } from "../../query/blogs.js";
+import { deleteBlog, editBlog, getBlogDetails } from "../../query/blogs.js";
 import { createComments, getComments } from "../../query/comments.js";
 import {
   toggleNavLinks,
@@ -89,9 +89,15 @@ const blogDeleteBtn = document.querySelector("#delete_blog__btn");
 blogDeleteBtn.addEventListener("click", handleBlogDelete);
 
 async function handleBlogDelete() {
-  console.log("delete btn clicked;");
+  const query = deleteBlog;
+  const variables = {
+    blogId,
+  };
   try {
-    let response = await axios.delete(`/blogs/${+blogId}`);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to delete blog");
     }
@@ -139,16 +145,22 @@ editBlogForm.addEventListener("submit", handleBlogEdit);
 async function handleBlogEdit(event) {
   event.preventDefault();
 
-  const payload = {
-    status: editStatus.value,
-    title: editTitle.value,
-    content: editContent.value,
-    user_id: +loggedInfo.loggedUser.id,
-    organization_id: +loggedInfo.organization.id,
+  const query = editBlog;
+  const variables = {
+    blogId,
+    blogInfo: {
+      status: editStatus.value,
+      title: editTitle.value,
+      content: editContent.value,
+      userId: +loggedInfo.loggedUser.id,
+      organizationId: +loggedInfo.organization.id,
+    },
   };
-
   try {
-    let response = await axios.put(`/blogs/${+blogId}`, payload);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to edit blog");
     }

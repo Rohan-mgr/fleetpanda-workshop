@@ -2,6 +2,7 @@ import { getComments } from "../../query/comments.js";
 import {
   createProfile,
   editProfile,
+  getUserInfo,
   uploadProfile,
 } from "../../query/users.js";
 import {
@@ -65,30 +66,33 @@ const editDob = document.querySelector("#edit__dob");
 const profileDetailsWrapper = document.querySelector(".profile__details");
 const avatar = document.querySelector("#avatar");
 async function getUserDetails() {
+  const query = getUserInfo;
+  const variables = {
+    userId,
+  };
   try {
-    let response = await axios.get(`/users/${+userId}/info`);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
-      throw new Error("Failed to fetch user details`");
+      throw new Error("Failed to fetch user details");
     }
-    let { userDetails } = response?.data;
-    console.log(userDetails, "user details >>>>>");
-    if (userDetails.avatar) avatar.src = userDetails.avatar;
-    profileDetailsWrapper.innerHTML = renderProfileDetails(
-      userDetails?.profile,
-      true
-    );
+    const { user } = response?.data?.data?.userDetails;
+    if (user.avatar) avatar.src = `http://localhost:3000/${user.avatar}`;
+    profileDetailsWrapper.innerHTML = renderProfileDetails(user?.profile, true);
 
-    if (userDetails?.profile) {
-      editAddress.value = userDetails?.profile.address;
-      editCountry.value = userDetails?.profile.country;
-      editAge.value = userDetails?.profile.age;
-      editContact.value = userDetails?.profile.contact;
-      editDob.value = new Date(userDetails?.profile.dob)
+    if (user?.profile) {
+      editAddress.value = user?.profile.address;
+      editCountry.value = user?.profile.country;
+      editAge.value = user?.profile.age;
+      editContact.value = user?.profile.contact;
+      editDob.value = new Date(user?.profile.dob)
         .toISOString()
         .substring(0, 10);
-      editGender.selectedIndex = getEditGender(userDetails?.profile.gender);
+      editGender.selectedIndex = getEditGender(user?.profile.gender);
     }
-    if (userDetails?.profile) {
+    if (user?.profile) {
       editProfileBtn.style.display = "block";
     } else {
       addProfileBtn.style.display = "block";

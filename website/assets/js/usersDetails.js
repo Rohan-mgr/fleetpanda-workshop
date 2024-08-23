@@ -1,4 +1,5 @@
 import { createComments, getComments } from "../../query/comments.js";
+import { getUserInfo } from "../../query/users.js";
 import {
   logOut,
   renderBlogComments,
@@ -30,19 +31,24 @@ const profileDetailsWrapper = document.querySelector(".profile__details");
 
 const avatar = document.querySelector("#avatar");
 async function getUserDetails() {
+  const query = getUserInfo;
+  const variables = {
+    userId,
+  };
   try {
-    let response = await axios.get(`/users/${+userId}/info`);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to fetch user details");
     }
-    const { userDetails } = response?.data;
-    console.log(userDetails);
-    if (userDetails?.avatar) avatar.src = userDetails?.avatar;
-    userFullname.innerHTML = userDetails.fullname;
-    userEmail.innerHTML = userDetails.email;
-    profileDetailsWrapper.innerHTML = renderProfileDetails(
-      userDetails?.profile
-    );
+    const { user } = response?.data?.data?.userDetails;
+    console.log(user);
+    if (user?.avatar) avatar.src = `http://localhost:3000/${user?.avatar}`;
+    userFullname.innerHTML = user.fullname;
+    userEmail.innerHTML = user.email;
+    profileDetailsWrapper.innerHTML = renderProfileDetails(user?.profile);
   } catch (error) {
     throw error;
   }

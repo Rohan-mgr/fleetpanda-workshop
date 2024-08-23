@@ -87,3 +87,28 @@ export const fetchOrgUsers = `
     }
   }
 `;
+
+export const getUserInfo = `
+  query GetUserDetails($userId: ID!) {
+    userDetails(userId: $userId) {
+      user {
+        id
+        fullname
+        email
+        avatar
+        createdAt
+        profile {
+          id
+          address
+          age
+          contact
+          country
+          gender
+          dob
+          createdAt
+        }
+      }
+      errors
+    }
+  }
+`;

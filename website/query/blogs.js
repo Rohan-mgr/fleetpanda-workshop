@@ -35,3 +35,27 @@ export const getBlogDetails = `
     }
   }
 `;
+
+export const editBlog = `
+  mutation EditBlog($blogId: ID!, $blogInfo: BlogInput!) {
+    editBlog(input:{blogId: $blogId, blogInfo: $blogInfo}) {
+      blog {
+        id
+        organizationId
+        title
+        content
+        userId
+      }
+      errors
+    }
+  }
+`;
+
+export const deleteBlog = `
+  mutation DeleteBlog($blogId: ID!) {
+    deleteBlog(input: {blogId: $blogId}){
+      message
+      error
+    }
+  }
+`;

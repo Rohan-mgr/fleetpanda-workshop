@@ -11,6 +11,7 @@ import {
   renderOrganizationsDropDown,
 } from "./helper.js";
 import { createUser } from "../../query/users.js";
+import { getOrganizations } from "../../query/organizations.js";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -53,13 +54,14 @@ confirmPassword.addEventListener("keyup", (e) =>
 
 const selectOrganization = document.querySelector("#organization");
 async function fetchOrganization() {
+  const query = getOrganizations;
   try {
-    let response = await axios.get("/organizations");
+    let response = await axios.post("/graphql", { query });
     if (response.status !== 200) {
       throw new Error("Fetching organizations failed!");
     }
-    const { data } = response;
-    selectOrganization.innerHTML = renderOrganizationsDropDown(data);
+    const { organizations } = response?.data?.data?.getOrganizations;
+    selectOrganization.innerHTML = renderOrganizationsDropDown(organizations);
   } catch (error) {
     throw error;
   }
