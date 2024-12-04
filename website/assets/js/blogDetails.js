@@ -1,3 +1,5 @@
+import { deleteBlog, editBlog, getBlogDetails } from "../../query/blogs.js";
+import { createComments, getComments } from "../../query/comments.js";
 import {
   toggleNavLinks,
   logOut,
@@ -31,20 +33,27 @@ const blogDetailActionBtn = document.querySelector(
 const loggedInfo = JSON.parse(localStorage.getItem("loggedUser"));
 async function getPostDetails() {
   try {
-    let response = await axios.get(`/blogs/${+blogId}`);
+    const query = getBlogDetails;
+    const variables = { blogId: +blogId };
+
+    const response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
+    console.log(response);
     if (response.status !== 200) {
       throw new Error("Failed to fetch blog details");
     }
-    const { blog } = response?.data;
-    blogDetailsWrapper.innerHTML = renderBlogDetails(blog);
+    const { blogDetails } = response?.data?.data;
+    blogDetailsWrapper.innerHTML = renderBlogDetails(blogDetails);
 
-    editStatus.selectedIndex = getEditStatus(blog.status);
-    editTitle.value = blog.title;
-    editContent.value = blog.content;
+    editStatus.selectedIndex = getEditStatus(blogDetails.status);
+    editTitle.value = blogDetails.title;
+    editContent.value = blogDetails.content;
 
-    const blogCreatorId = blog.user_id;
-    const loggedUserId = loggedInfo.loggedUser.id;
-    if (blogCreatorId === loggedUserId) {
+    const blogCreatorId = blogDetails.userId;
+    const loggedUserId = +loggedInfo.loggedUser.id;
+    if (blogCreatorId == loggedUserId) {
       blogDetailActionBtn.style.display = "flex";
     } else {
       blogDetailActionBtn.style.display = "none";
@@ -58,12 +67,18 @@ getPostComments();
 
 async function getPostComments() {
   try {
-    let response = await axios.get(`/blogs/${+blogId}/comments`);
+    const query = getComments;
+    const variables = { blogId: +blogId };
+
+    const response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to fetch post comments");
     }
-    let { comments } = response?.data;
-    console.log(comments, "comments >>>>>");
+    const { comments } = response?.data?.data?.blogComments;
+    console.log(comments, "blog comments >>>>>");
     blogCommentsWrapper.innerHTML = renderBlogComments(comments);
   } catch (error) {
     throw error;
@@ -74,9 +89,15 @@ const blogDeleteBtn = document.querySelector("#delete_blog__btn");
 blogDeleteBtn.addEventListener("click", handleBlogDelete);
 
 async function handleBlogDelete() {
-  console.log("delete btn clicked;");
+  const query = deleteBlog;
+  const variables = {
+    blogId,
+  };
   try {
-    let response = await axios.delete(`/blogs/${+blogId}`);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to delete blog");
     }
@@ -124,16 +145,22 @@ editBlogForm.addEventListener("submit", handleBlogEdit);
 async function handleBlogEdit(event) {
   event.preventDefault();
 
-  const payload = {
-    status: editStatus.value,
-    title: editTitle.value,
-    content: editContent.value,
-    user_id: +loggedInfo.loggedUser.id,
-    organization_id: +loggedInfo.organization.id,
+  const query = editBlog;
+  const variables = {
+    blogId,
+    blogInfo: {
+      status: editStatus.value,
+      title: editTitle.value,
+      content: editContent.value,
+      userId: +loggedInfo.loggedUser.id,
+      organizationId: +loggedInfo.organization.id,
+    },
   };
-
   try {
-    let response = await axios.put(`/blogs/${+blogId}`, payload);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to edit blog");
     }
@@ -153,15 +180,22 @@ addCommentForm.addEventListener("submit", handleAddComment);
 async function handleAddComment(event) {
   event.preventDefault();
 
-  const payload = {
-    body: comment.value,
-    commenterId: +loggedInfo.loggedUser.id,
+  const query = createComments;
+  const variables = {
+    blogId: +blogId,
+    commentInfo: {
+      body: comment.value,
+      createdBy: +loggedInfo.loggedUser.id,
+    },
   };
 
-  console.log(payload, "comment payload .....");
+  console.log(variables, "comment variables .....");
 
   try {
-    let response = await axios.post(`/blogs/${+blogId}/comments`, payload);
+    let response = await axios.post("/graphql", {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to edit blog");
     }

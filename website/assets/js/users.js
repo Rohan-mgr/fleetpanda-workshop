@@ -1,3 +1,4 @@
+import { fetchOrgUsers } from "../../query/users.js";
 import {
   logOut,
   renderUserCards,
@@ -26,12 +27,20 @@ const userCardsWrapper = document.querySelector(".cards__wrapper");
 async function fetchOrganizationUsers() {
   try {
     const organizationId = loggedInfo.organization.id;
-    let response = await axios.get(`/organizations/${+organizationId}/users`);
+    const query = fetchOrgUsers;
+    const variables = {
+      organizationId,
+    };
+
+    const response = await axios.post(`/graphql`, {
+      query,
+      variables,
+    });
     if (response.status !== 200) {
       throw new Error("Failed to fetch users");
     }
-    let { users } = response?.data;
-    console.log(users, "users......");
+
+    let { users } = response?.data?.data?.organizationUsers;
     const filteredUser = users.filter(
       (user) => user.id != +loggedInfo.loggedUser.id
     );

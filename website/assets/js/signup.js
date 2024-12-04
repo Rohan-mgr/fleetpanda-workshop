@@ -10,6 +10,8 @@ import {
   toggleHamburgerMenu,
   renderOrganizationsDropDown,
 } from "./helper.js";
+import { createUser } from "../../query/users.js";
+import { getOrganizations } from "../../query/organizations.js";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -52,13 +54,14 @@ confirmPassword.addEventListener("keyup", (e) =>
 
 const selectOrganization = document.querySelector("#organization");
 async function fetchOrganization() {
+  const query = getOrganizations;
   try {
-    let response = await axios.get("/organizations");
+    let response = await axios.post("/graphql", { query });
     if (response.status !== 200) {
       throw new Error("Fetching organizations failed!");
     }
-    const { data } = response;
-    selectOrganization.innerHTML = renderOrganizationsDropDown(data);
+    const { organizations } = response?.data?.data?.getOrganizations;
+    selectOrganization.innerHTML = renderOrganizationsDropDown(organizations);
   } catch (error) {
     throw error;
   }
@@ -78,16 +81,21 @@ async function handleSignUpFormSubmission(e) {
       password.value
     )
   ) {
-    let payload = {
-      fullName: fullName.value,
-      email: email.value,
-      password: password.value,
-      confirmPassword: confirmPassword.value,
-      organizationId: +selectOrganization.value,
+    const query = createUser;
+    const variables = {
+      userInfo: {
+        fullname: fullName.value,
+        email: email.value,
+        password: password.value,
+        passwordConfirmation: confirmPassword.value,
+        organizationId: +selectOrganization.value,
+      },
     };
-    console.log(payload, "sign up payload");
     try {
-      let response = await axios.post("/users", payload);
+      const response = await axios.post("/graphql", {
+        query,
+        variables,
+      });
       if (response.status !== 200) {
         throw new Error("User Registration failed!");
       }
@@ -96,7 +104,5 @@ async function handleSignUpFormSubmission(e) {
     } catch (error) {
       throw error;
     }
-
-    location.href = "/website/app/login.html";
   }
 }

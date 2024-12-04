@@ -46,11 +46,11 @@ export function renderBlogDetails(blog) {
         <div class="blog__details__header__wrapper">
         <h1>${blog.title}</h1>
         <div style="display: flex; gap: 1rem; font-weight: 600;">
-          <p>Blog Created: ${blog.created_at.toLocaleString().slice(0, 10)}</p>
+          <p>Blog Created: ${blog.createdAt.toLocaleString().slice(0, 10)}</p>
           <p>Status: ${blog.status}</p>
         </div>
         </div>
-          <p>${blog.content}</p>
+          <p style="text-align: justify">${blog.content}</p>
         </div>
       </div>
     `;
@@ -76,7 +76,7 @@ export function renderBlogComments(comments) {
               <h3>${comment.commenter.fullname}</h3>
               <p>${comment.commenter.email}</p>
             </div>
-            <p style="position: absolute; top: 15px; right: 15px; color: #8e8686">Commented on: ${comment.created_at
+            <p style="position: absolute; top: 15px; right: 15px; color: #8e8686">Commented on: ${comment.createdAt
               .toLocaleString()
               .slice(0, 10)}</p>
             </div>
@@ -157,7 +157,7 @@ export function renderUserCards(users) {
             <img
               src=${
                 user.avatar
-                  ? user.avatar
+                  ? `http://localhost:3000/${user.avatar}`
                   : "https://t3.ftcdn.net/jpg/00/64/67/52/360_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.webp"
               }
               alt="card-img"
@@ -201,4 +201,15 @@ export function getEditGender(gender) {
     default:
       return 0;
   }
+}
+
+export function convertImageToBase64(imageFile) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      resolve(reader.result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(imageFile);
+  });
 }
